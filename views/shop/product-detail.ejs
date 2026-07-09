@@ -1,0 +1,167 @@
+<a href="/shop" class="btn btn-sm btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i> Kembali ke Belanja</a>
+
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card card-elegant overflow-hidden">
+      <div class="product-detail-media" <% if (product.visual.type === 'icon') { %>style="background: <%= product.visual.gradient %>;"<% } %>>
+        <% if (product.visual.type === 'image') { %>
+          <img src="<%= product.visual.src %>" alt="<%= product.name %>" onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\'fa-solid fa-box\'></i>';this.parentElement.style.background='linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';">
+        <% } else { %>
+          <i class="fa-solid <%= product.visual.icon %>"></i>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card card-elegant p-4 mb-3">
+      <div class="text-uppercase small text-muted fw-semibold mb-1"><%= product.category ? product.category.name : '-' %></div>
+      <h3 class="fw-bold mb-2"><%= product.name %></h3>
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <% for (let i = 1; i <= 5; i++) { %>
+          <i class="fa-solid fa-star <%= i <= Math.round(avgRating) ? 'star-filled' : 'star-empty' %>"></i>
+        <% } %>
+        <span class="text-muted small">
+          <% if (reviewCount > 0) { %>
+            <%= avgRating.toFixed(1) %> dari 5 (<%= reviewCount %> ulasan)
+          <% } else { %>
+            Belum ada ulasan
+          <% } %>
+        </span>
+      </div>
+      <div class="fs-3 fw-bold text-primary mb-3">Rp <%= product.price.toLocaleString('id-ID') %></div>
+      <div class="mb-3">
+        <% if (product.stock > 0) { %>
+        <span class="chip"><i class="fa-solid fa-warehouse"></i> Stok tersedia: <%= product.stock %></span>
+        <% } else { %>
+        <span class="chip" style="background:#fee2e2;color:#b91c1c;">Stok habis</span>
+        <% } %>
+      </div>
+
+      <div class="d-flex gap-2 align-items-center">
+        <input type="number" min="1" max="<%= product.stock %>" value="1" id="qtyInput" class="form-control" style="width:80px;" <%= product.stock === 0 ? 'disabled' : '' %>>
+        <button type="button" id="addToCartBtn" class="btn btn-primary btn-elegant flex-fill" <%= product.stock === 0 ? 'disabled' : '' %>>
+          <i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang &amp; Checkout
+        </button>
+      </div>
+      <div id="stockMsg" class="text-danger small mt-2" style="display:none;"></div>
+    </div>
+
+    <!-- Review form -->
+    <div class="card card-elegant p-4">
+      <h6 class="mb-3">Beri Ulasan</h6>
+      <% if (canReview) { %>
+      <form method="POST" action="/shop/products/<%= product.id %>/review">
+        <div class="mb-3">
+          <label class="form-label small">Rating</label>
+          <div class="star-picker" id="starPicker">
+            <% for (let i = 1; i <= 5; i++) { %>
+            <i class="fa-solid fa-star star-pick" data-value="<%= i %>"></i>
+            <% } %>
+          </div>
+          <input type="hidden" name="rating" id="ratingField" value="<%= myReview ? myReview.rating : 0 %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Komentar (opsional)</label>
+          <textarea name="comment" class="form-control" rows="3" placeholder="Bagaimana pengalamanmu dengan produk ini?"><%= myReview ? myReview.comment : '' %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100"><%= myReview ? 'Perbarui Ulasan' : 'Kirim Ulasan' %></button>
+      </form>
+      <% } else { %>
+      <div class="text-center text-muted py-3">
+        <i class="fa-solid fa-lock mb-2"></i>
+        <p class="mb-0 small">Kamu bisa memberi ulasan setelah membeli produk ini.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="card card-elegant p-4 mt-4">
+  <h6 class="mb-3">Ulasan Pelanggan (<%= reviewCount %>)</h6>
+  <% if (reviews.length > 0) { %>
+    <% reviews.forEach(r => { %>
+    <div class="review-item py-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="fw-semibold"><%= r.customer_name %></div>
+          <div>
+            <% for (let i = 1; i <= 5; i++) { %>
+              <i class="fa-solid fa-star small <%= i <= r.rating ? 'star-filled' : 'star-empty' %>"></i>
+            <% } %>
+          </div>
+        </div>
+        <div class="text-muted small"><%= new Date(r.created_at).toLocaleDateString('id-ID') %></div>
+      </div>
+      <% if (r.comment) { %>
+      <p class="mb-0 mt-2 small"><%= r.comment %></p>
+      <% } %>
+    </div>
+    <% }) %>
+  <% } else { %>
+  <div class="text-center text-muted py-4">
+    <i class="fa-solid fa-comment-slash fa-2x mb-2"></i>
+    <p class="mb-0">Belum ada ulasan untuk produk ini.</p>
+  </div>
+  <% } %>
+</div>
+
+<style>
+  .star-filled { color: #f7b733; }
+  .star-empty { color: #e5e7eb; }
+  .product-detail-media {
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.9);
+  }
+  .product-detail-media img { width: 100%; height: 100%; object-fit: cover; }
+  .star-picker { font-size: 1.6rem; cursor: pointer; }
+  .star-picker .star-pick { color: #e5e7eb; margin-right: 4px; transition: color 0.15s ease; }
+  .star-picker .star-pick.active { color: #f7b733; }
+</style>
+
+<script>
+  const starPicker = document.getElementById('starPicker');
+  if (starPicker) {
+    const ratingField = document.getElementById('ratingField');
+    const stars = starPicker.querySelectorAll('.star-pick');
+
+    function paint(value) {
+      stars.forEach(s => s.classList.toggle('active', Number(s.dataset.value) <= value));
+    }
+    paint(Number(ratingField.value));
+
+    stars.forEach(s => {
+      s.addEventListener('click', () => {
+        ratingField.value = s.dataset.value;
+        paint(Number(s.dataset.value));
+      });
+      s.addEventListener('mouseenter', () => paint(Number(s.dataset.value)));
+    });
+    starPicker.addEventListener('mouseleave', () => paint(Number(ratingField.value)));
+  }
+
+  const addBtn = document.getElementById('addToCartBtn');
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      const qty = Math.max(1, parseInt(document.getElementById('qtyInput').value) || 1);
+      const stockMsg = document.getElementById('stockMsg');
+      const maxStock = <%= product.stock %>;
+      if (qty > maxStock) {
+        stockMsg.textContent = `Stok tidak cukup. Tersedia: ${maxStock}.`;
+        stockMsg.style.display = 'block';
+        return;
+      }
+      const items = JSON.stringify([{ product_id: '<%= product.id %>', qty }]);
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/shop/checkout';
+      form.innerHTML = `<input type="hidden" name="items" value='${items}'><input type="hidden" name="note" value="">`;
+      document.body.appendChild(form);
+      form.submit();
+    });
+  }
+</script>

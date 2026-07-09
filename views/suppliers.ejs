@@ -1,0 +1,40 @@
+<h2 class="mb-4">Supplier</h2>
+
+<div class="row g-3">
+  <% if (user.role === 'admin') { %>
+  <div class="col-md-4">
+    <div class="card card-stat p-3">
+      <h6>Tambah Supplier</h6>
+      <form method="POST" action="/suppliers/new">
+        <input type="text" name="name" class="form-control mb-2" placeholder="Nama supplier" required>
+        <input type="text" name="contact" class="form-control mb-2" placeholder="Kontak">
+        <input type="text" name="address" class="form-control mb-2" placeholder="Alamat">
+        <button class="btn btn-primary w-100">Tambah</button>
+      </form>
+    </div>
+  </div>
+  <% } %>
+  <div class="col-md-<%= user.role === 'admin' ? '8' : '12' %>">
+    <div class="card card-stat p-3">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Nama</th><th>Kontak</th><th>Alamat</th><% if (user.role === 'admin') { %><th>Aksi</th><% } %></tr></thead>
+        <tbody>
+          <% suppliers.forEach(s => { %>
+          <tr>
+            <td><%= s.name %></td>
+            <td><%= s.contact || '-' %></td>
+            <td><%= s.address || '-' %></td>
+            <% if (user.role === 'admin') { %>
+            <td>
+              <form action="/suppliers/<%= s.id %>/delete" method="POST" onsubmit="return confirm('Hapus supplier ini?')">
+                <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+              </form>
+            </td>
+            <% } %>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

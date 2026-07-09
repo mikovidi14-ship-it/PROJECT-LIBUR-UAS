@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Pesanan Saya</h2>
+    <p class="text-muted mb-0"><%= sales.length %> pesanan tercatat</p>
+  </div>
+  <a href="/shop" class="btn btn-primary btn-elegant"><i class="fa-solid fa-cart-shopping"></i> Belanja Lagi</a>
+</div>
+
+<div class="card card-elegant p-3">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>No. Pesanan</th><th>Tanggal</th><th>Item</th><th>Total</th><th>Pembayaran</th><th>Status</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sales.forEach(s => { %>
+        <tr>
+          <td><span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span></td>
+          <td><%= new Date(s.sale_date).toLocaleString('id-ID') %></td>
+          <td><%= s.items.length %> produk</td>
+          <td class="fw-semibold text-primary">Rp <%= s.total.toLocaleString('id-ID') %></td>
+          <td>
+            <% if (s.paymentStatusMeta) { %>
+            <span class="badge bg-<%= s.paymentStatusMeta.badge %> text-<%= s.paymentStatusMeta.text %>"><i class="fa-solid <%= s.paymentStatusMeta.icon %>"></i> <%= s.paymentStatusMeta.label %></span>
+            <% } else { %>-<% } %>
+          </td>
+          <td><span class="badge bg-<%= s.statusMeta.badge %> text-<%= s.statusMeta.text %>"><i class="fa-solid <%= s.statusMeta.icon %>"></i> <%= s.statusMeta.label %></span></td>
+          <td><a href="/my-orders/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-truck-fast"></i> Lacak</a></td>
+        </tr>
+        <% }) %>
+        <% if (sales.length === 0) { %>
+        <tr><td colspan="7" class="text-center text-muted py-4">Kamu belum pernah belanja. <a href="/shop">Mulai belanja</a></td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

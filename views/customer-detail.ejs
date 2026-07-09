@@ -1,0 +1,62 @@
+<div class="mb-4">
+  <a href="/customers" class="btn btn-sm btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pelanggan</a>
+
+  <div class="customer-profile-card d-flex align-items-center gap-3 flex-wrap">
+    <div class="customer-avatar"><%= customer.name.charAt(0).toUpperCase() %></div>
+    <div class="flex-grow-1">
+      <h3 class="mb-1 fw-bold"><%= customer.name %></h3>
+      <div class="opacity-75 small">
+        <i class="fa-solid fa-phone me-1"></i><%= customer.phone %>
+        <span class="mx-2">·</span>
+        <i class="fa-solid fa-location-dot me-1"></i><%= customer.address %>
+      </div>
+    </div>
+    <div class="text-end">
+      <div class="opacity-75 small">Pelanggan sejak</div>
+      <div class="fw-semibold"><%= new Date(customer.created_at).toLocaleDateString('id-ID') %></div>
+    </div>
+  </div>
+</div>
+
+<div class="stat-grid mb-4">
+  <div class="stat-card stat-card-5">
+    <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+    <div class="stat-card-value">Rp <%= totalBelanja.toLocaleString('id-ID') %></div>
+    <div class="stat-card-label">Total Belanja</div>
+  </div>
+  <div class="stat-card stat-card-1">
+    <div class="stat-card-icon"><i class="fa-solid fa-receipt"></i></div>
+    <div class="stat-card-value"><%= totalTransaksi %></div>
+    <div class="stat-card-label">Jumlah Transaksi</div>
+  </div>
+  <div class="stat-card stat-card-4">
+    <div class="stat-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+    <div class="stat-card-value">Rp <%= Math.round(avgBelanja).toLocaleString('id-ID') %></div>
+    <div class="stat-card-label">Rata-rata / Transaksi</div>
+  </div>
+</div>
+
+<div class="card card-elegant p-3">
+  <h6 class="mb-3 px-2 pt-1">Riwayat Transaksi</h6>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr><th>No. Nota</th><th>Tanggal</th><th>Item</th><th>Total</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% sales.forEach(s => { %>
+        <tr>
+          <td><span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span></td>
+          <td><%= new Date(s.sale_date).toLocaleString('id-ID') %></td>
+          <td><%= s.items.length %> produk</td>
+          <td class="fw-semibold text-primary">Rp <%= s.total.toLocaleString('id-ID') %></td>
+          <td><a href="/sales/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-receipt"></i> Detail</a></td>
+        </tr>
+        <% }) %>
+        <% if (sales.length === 0) { %>
+        <tr><td colspan="5" class="text-center text-muted py-4">Pelanggan ini belum pernah bertransaksi.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

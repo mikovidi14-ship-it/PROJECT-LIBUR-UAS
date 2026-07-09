@@ -1,0 +1,276 @@
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h2 class="mb-1">Kelola Pesanan</h2>
+    <p class="text-muted mb-0">
+      No. Pesanan <span class="chip">#<%= sale.id.slice(0,8).toUpperCase() %></span>
+      <% if (sale.archived) { %><span class="badge bg-secondary ms-1"><i class="fa-solid fa-box-archive"></i> Diarsipkan</span><% } %>
+    </p>
+  </div>
+  <a href="/orders" class="btn btn-outline-secondary btn-elegant"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+</div>
+
+<% if (error) { %>
+<div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> <%= error %></div>
+<% } %>
+
+<% if (sale.status === 'dibatalkan') { %>
+<div class="alert alert-danger d-flex align-items-center gap-2 mb-4 shadow-sm" style="border-radius: 14px;">
+  <i class="fa-solid fa-circle-xmark fa-lg"></i>
+  <div><strong>Pesanan ini telah dibatalkan.</strong></div>
+</div>
+<% } else { %>
+<div class="card card-elegant p-4 mb-4">
+  <div class="order-tracker">
+    <% steps.forEach((step, idx) => { %>
+    <div class="tracker-step <%= idx < currentStepIndex ? 'done' : (idx === currentStepIndex ? 'active' : '') %>">
+      <div class="tracker-dot"><i class="fa-solid <%= idx <= currentStepIndex ? 'fa-check' : step.icon %>"></i></div>
+      <div class="tracker-label"><%= step.label %></div>
+    </div>
+    <% if (idx < steps.length - 1) { %><div class="tracker-line <%= idx < currentStepIndex ? 'done' : '' %>"></div><% } %>
+    <% }) %>
+  </div>
+  <div class="text-center mt-3">
+    <span class="badge bg-<%= sale.statusMeta.badge %> text-<%= sale.statusMeta.text %> px-3 py-2" style="border-radius: 20px; font-size:0.85rem;">
+      <i class="fa-solid <%= sale.statusMeta.icon %>"></i> <%= sale.statusMeta.label %>
+    </span>
+  </div>
+</div>
+<% } %>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <!-- ===== Payment status ===== -->
+    <% if (paymentMethod && paymentStatusMeta && sale.status !== 'dibatalkan') { %>
+    <div class="card card-elegant p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+        <div>
+          <h6 class="fw-bold mb-1"><i class="fa-solid <%= paymentMethod.icon %> text-primary"></i> <%= paymentMethod.label %></h6>
+          <div class="text-muted small">Total: <strong class="text-primary">Rp <%= sale.total.toLocaleString('id-ID') %></strong></div>
+          <% if (sale.payment_note) { %>
+          <div class="text-muted small mt-1"><i class="fa-solid fa-note-sticky"></i> Catatan pelanggan: "<%= sale.payment_note %>"</div>
+          <% } %>
+        </div>
+        <span class="badge bg-<%= paymentStatusMeta.badge %> text-<%= paymentStatusMeta.text %> px-3 py-2" style="border-radius:20px;">
+          <i class="fa-solid <%= paymentStatusMeta.icon %>"></i> <%= paymentStatusMeta.label %>
+        </span>
+      </div>
+
+      <% if (sale.payment_status === 'menunggu_konfirmasi') { %>
+        <% if (sale.payment_proof) { %>
+        <div class="mb-3">
+          <div class="small fw-semibold text-muted mb-1"><i class="fa-solid fa-receipt"></i> Bukti Pembayaran dari Pelanggan</div>
+          <a href="<%= sale.payment_proof %>" target="_blank">
+            <img src="<%= sale.payment_proof %>" alt="Bukti pembayaran" class="rounded border" style="max-width:220px; max-height:220px; object-fit:cover;">
+          </a>
+          <div class="text-muted" style="font-size:0.72rem;">Klik gambar untuk melihat ukuran penuh</div>
+        </div>
+        <% } else { %>
+        <div class="alert alert-warning small py-2 mb-3"><i class="fa-solid fa-triangle-exclamation"></i> Pelanggan belum melampirkan bukti pembayaran.</div>
+        <% } %>
+        <form method="POST" action="/orders/<%= sale.id %>/confirm-payment">
+          <button type="submit" class="btn btn-success btn-elegant w-100"><i class="fa-solid fa-check-double"></i> Konfirmasi Pembayaran Diterima</button>
+        </form>
+      <% } else if (sale.payment_status === 'menunggu_pembayaran') { %>
+        <div class="text-muted small"><i class="fa-solid fa-hourglass-half"></i> Pelanggan belum mengonfirmasi pembayaran.</div>
+      <% } else if (sale.payment_status === 'lunas') { %>
+        <div class="text-success small mb-2"><i class="fa-solid fa-circle-check"></i> Pembayaran sudah dikonfirmasi.</div>
+        <% if (sale.payment_proof) { %>
+        <a href="<%= sale.payment_proof %>" target="_blank">
+          <img src="<%= sale.payment_proof %>" alt="Bukti pembayaran" class="rounded border" style="max-width:160px; max-height:160px; object-fit:cover;">
+        </a>
+        <% } %>
+      <% } else if (sale.payment_status === 'cod') { %>
+        <div class="text-muted small"><i class="fa-solid fa-hand-holding-dollar"></i> Dibayar tunai saat barang diterima.</div>
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- ===== Customer & delivery info ===== -->
+    <div class="card card-elegant p-4 mb-4">
+      <h6 class="fw-bold mb-3">Informasi Pelanggan</h6>
+      <div class="row g-3">
+        <div class="col-6">
+          <div class="small text-muted">Nama</div>
+          <div class="fw-semibold">
+            <% if (sale.customer) { %><a href="/customers/<%= sale.customer.id %>"><%= sale.customer.name %></a><% } else { %><%= sale.customer_name %><% } %>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="small text-muted">Telepon</div>
+          <div class="fw-semibold"><%= sale.customer && sale.customer.phone !== '-' ? sale.customer.phone : '-' %></div>
+        </div>
+        <div class="col-12">
+          <div class="small text-muted">Alamat Tujuan Pengiriman</div>
+          <div class="fw-semibold"><i class="fa-solid fa-location-dot text-primary me-1"></i><%= sale.shipping_address || 'Belum diisi' %></div>
+        </div>
+        <% if (sale.courier) { %>
+        <div class="col-12">
+          <div class="small text-muted">Kurir</div>
+          <div class="fw-semibold"><i class="fa-solid fa-truck text-primary me-1"></i><%= sale.courier %></div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- ===== Items ===== -->
+    <div class="card card-elegant p-4">
+      <h6 class="fw-bold mb-3">Rincian Pesanan</h6>
+      <table class="table table-sm mb-0">
+        <tbody>
+          <% sale.items.forEach(item => { %>
+          <tr>
+            <td>
+              <div class="fw-semibold small"><%= item.product_name %></div>
+              <div class="text-muted small"><%= item.qty %> x Rp <%= item.price.toLocaleString('id-ID') %></div>
+            </td>
+            <td class="text-end fw-semibold small align-middle">Rp <%= item.subtotal.toLocaleString('id-ID') %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="fw-bold">Total</td>
+            <td class="text-end fw-bold text-primary fs-5">Rp <%= sale.total.toLocaleString('id-ID') %></td>
+          </tr>
+        </tfoot>
+      </table>
+      <% if (sale.note) { %>
+      <div class="mt-3 p-2 bg-light rounded small"><strong>Catatan pelanggan:</strong> <%= sale.note %></div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <!-- ===== Action panel ===== -->
+    <div class="card card-elegant p-4 mb-4">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-bolt text-primary"></i> Aksi</h6>
+
+      <% if (sale.status === 'pending') { %>
+        <% const canConfirm = sale.payment_method === 'cod' || sale.payment_status === 'lunas'; %>
+        <% if (user.role === 'admin') { %>
+          <form method="POST" action="/orders/<%= sale.id %>/confirm" class="mb-2">
+            <button type="submit" class="btn btn-primary btn-elegant w-100" <%= canConfirm ? '' : 'disabled' %>>
+              <i class="fa-solid fa-check"></i> Konfirmasi Pesanan
+            </button>
+          </form>
+          <% if (!canConfirm) { %>
+          <div class="text-warning small mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Konfirmasi pembayaran dulu sebelum memproses pesanan.</div>
+          <% } %>
+          <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="collapse" data-bs-target="#cancelBox">
+            <i class="fa-solid fa-ban"></i> Batalkan Pesanan
+          </button>
+          <div class="collapse mt-2" id="cancelBox">
+            <form method="POST" action="/orders/<%= sale.id %>/cancel">
+              <textarea name="reason" class="form-control form-control-sm mb-2" rows="2" placeholder="Alasan pembatalan (opsional)"></textarea>
+              <button type="submit" class="btn btn-sm btn-danger w-100">Konfirmasi Pembatalan</button>
+            </form>
+          </div>
+        <% } else { %>
+          <div class="text-muted small"><i class="fa-solid fa-hourglass-half"></i> Menunggu admin mengonfirmasi pesanan ini.</div>
+        <% } %>
+
+      <% } else if (sale.status === 'diproses') { %>
+        <form method="POST" action="/orders/<%= sale.id %>/ship" class="mb-2">
+          <label class="form-label small">Alamat Tujuan</label>
+          <textarea name="destination" class="form-control form-control-sm mb-2" rows="2" required><%= sale.shipping_address || '' %></textarea>
+          <label class="form-label small">Kurir / Armada (opsional)</label>
+          <input type="text" name="courier" class="form-control form-control-sm mb-3" placeholder="Contoh: Kurir Internal / JNE / Gojek">
+          <button type="submit" class="btn btn-primary btn-elegant w-100"><i class="fa-solid fa-truck-fast"></i> Kirim Pesanan</button>
+        </form>
+        <% if (user.role === 'admin') { %>
+        <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="collapse" data-bs-target="#cancelBox">
+          <i class="fa-solid fa-ban"></i> Batalkan Pesanan
+        </button>
+        <div class="collapse mt-2" id="cancelBox">
+          <form method="POST" action="/orders/<%= sale.id %>/cancel">
+            <textarea name="reason" class="form-control form-control-sm mb-2" rows="2" placeholder="Alasan pembatalan (opsional)"></textarea>
+            <button type="submit" class="btn btn-sm btn-danger w-100">Konfirmasi Pembatalan</button>
+          </form>
+        </div>
+        <% } %>
+
+      <% } else if (sale.status === 'diantar') { %>
+        <form method="POST" action="/orders/<%= sale.id %>/complete">
+          <button type="submit" class="btn btn-primary btn-elegant w-100"><i class="fa-solid fa-clipboard-check"></i> Tandai Selesai &amp; Kirim ke Admin</button>
+        </form>
+        <div class="text-muted small mt-2">Gunakan tombol ini setelah pesanan sampai di tujuan. Admin akan memberi konfirmasi akhir ke pelanggan.</div>
+
+      <% } else if (sale.status === 'menunggu_konfirmasi_selesai') { %>
+        <% if (user.role === 'admin') { %>
+          <form method="POST" action="/orders/<%= sale.id %>/finish">
+            <button type="submit" class="btn btn-success btn-elegant w-100"><i class="fa-solid fa-circle-check"></i> Konfirmasi Selesai ke Pelanggan</button>
+          </form>
+        <% } else { %>
+          <div class="text-muted small"><i class="fa-solid fa-clipboard-check"></i> Sudah ditandai selesai. Menunggu konfirmasi akhir dari admin.</div>
+        <% } %>
+
+      <% } else if (sale.status === 'selesai') { %>
+        <div class="text-success small mb-3"><i class="fa-solid fa-circle-check"></i> Pesanan sudah selesai dan telah dikonfirmasi ke pelanggan.</div>
+        <% if (sale.archived) { %>
+        <form method="POST" action="/orders/<%= sale.id %>/restore">
+          <button type="submit" class="btn btn-outline-success w-100"><i class="fa-solid fa-rotate-left"></i> Pulihkan ke Pesanan Masuk</button>
+        </form>
+        <% } else { %>
+        <form method="POST" action="/orders/<%= sale.id %>/archive" onsubmit="return confirm('Hapus pesanan ini dari daftar Pesanan Masuk? Data tetap tersimpan dan tetap muncul di Penjualan/Laporan.');">
+          <button type="submit" class="btn btn-outline-danger w-100"><i class="fa-solid fa-trash"></i> Hapus dari Pesanan Masuk</button>
+        </form>
+        <% } %>
+      <% } else if (sale.status === 'dibatalkan') { %>
+        <% if (sale.archived) { %>
+        <form method="POST" action="/orders/<%= sale.id %>/restore">
+          <button type="submit" class="btn btn-outline-success w-100"><i class="fa-solid fa-rotate-left"></i> Pulihkan ke Pesanan Masuk</button>
+        </form>
+        <% } else { %>
+        <form method="POST" action="/orders/<%= sale.id %>/archive" onsubmit="return confirm('Hapus pesanan ini dari daftar Pesanan Masuk? Data tetap tersimpan dan tetap muncul di Penjualan/Laporan.');">
+          <button type="submit" class="btn btn-outline-danger w-100"><i class="fa-solid fa-trash"></i> Hapus dari Pesanan Masuk</button>
+        </form>
+        <% } %>
+      <% } else { %>
+        <div class="text-muted small">Tidak ada aksi lebih lanjut untuk pesanan ini.</div>
+      <% } %>
+    </div>
+
+    <!-- ===== History log ===== -->
+    <div class="card card-elegant p-4">
+      <h6 class="fw-bold mb-3">Riwayat Pesanan</h6>
+      <ul class="history-log list-unstyled mb-0">
+        <% (sale.status_history || []).slice().reverse().forEach(h => { %>
+        <li class="history-item">
+          <div class="history-dot"></div>
+          <div>
+            <div class="fw-semibold small"><%= h.note || h.status %></div>
+            <div class="text-muted small"><%= new Date(h.at).toLocaleString('id-ID') %> &middot; <%= h.by %></div>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .order-tracker { display: flex; align-items: flex-start; }
+  .tracker-step { display: flex; flex-direction: column; align-items: center; text-align: center; width: 90px; flex-shrink: 0; }
+  .tracker-dot {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #eef0fb; color: #a3a6c9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; margin-bottom: 0.5rem; transition: all 0.25s ease;
+  }
+  .tracker-step.done .tracker-dot { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
+  .tracker-step.active .tracker-dot { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; box-shadow: 0 0 0 5px rgba(79,70,229,0.15); }
+  .tracker-label { font-size: 0.72rem; color: #6b7280; font-weight: 600; line-height: 1.2; }
+  .tracker-step.active .tracker-label, .tracker-step.done .tracker-label { color: #1e1b4b; }
+  .tracker-line { flex: 1; height: 3px; background: #eef0fb; margin-top: 19px; border-radius: 4px; }
+  .tracker-line.done { background: linear-gradient(90deg, #11998e, #38ef7d); }
+
+  .history-log { position: relative; padding-left: 1rem; }
+  .history-item { position: relative; padding-left: 1.25rem; padding-bottom: 1.1rem; border-left: 2px solid #eef0fb; }
+  .history-item:last-child { border-color: transparent; padding-bottom: 0; }
+  .history-dot { position: absolute; left: -6px; top: 2px; width: 10px; height: 10px; border-radius: 50%; background: #4f46e5; }
+
+  @media (max-width: 576px) {
+    .tracker-label { font-size: 0.62rem; }
+    .tracker-step { width: 60px; }
+  }
+</style>

@@ -1,0 +1,59 @@
+<h2 class="mb-4">Laporan</h2>
+
+<div class="card card-stat p-3 mb-4">
+  <form class="row g-2 align-items-end" method="GET" action="/reports">
+    <div class="col-md-3">
+      <label class="form-label small">Dari Tanggal</label>
+      <input type="date" name="from" value="<%= from %>" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label small">Sampai Tanggal</label>
+      <input type="date" name="to" value="<%= to %>" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100">Filter</button>
+    </div>
+    <div class="col-md-4 text-md-end">
+      <a href="/reports/export/excel?from=<%= from %>&to=<%= to %>" class="btn btn-success"><i class="fa-solid fa-file-excel"></i> Excel</a>
+      <a href="/reports/export/pdf?from=<%= from %>&to=<%= to %>" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+    </div>
+  </form>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-8">
+    <div class="card card-stat p-3">
+      <h6 class="mb-3">Riwayat Transaksi (<%= transactions.length %>)</h6>
+      <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+        <table class="table table-sm table-hover">
+          <thead><tr><th>Tanggal</th><th>Produk</th><th>Tipe</th><th>Jml</th></tr></thead>
+          <tbody>
+            <% transactions.forEach(t => { %>
+            <tr>
+              <td><%= new Date(t.transaction_date).toLocaleDateString('id-ID') %></td>
+              <td><%= t.product ? t.product.name : '-' %></td>
+              <td><span class="badge <%= t.type === 'in' ? 'bg-success' : 'bg-danger' %>"><%= t.type === 'in' ? 'Masuk' : 'Keluar' %></span></td>
+              <td><%= t.quantity %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-stat p-3">
+      <h6 class="mb-3 text-danger">Stok Menipis</h6>
+      <ul class="list-group list-group-flush">
+        <% lowStock.forEach(p => { %>
+        <li class="list-group-item d-flex justify-content-between">
+          <%= p.name %> <span class="badge badge-low"><%= p.stock %>/<%= p.min_stock %></span>
+        </li>
+        <% }) %>
+        <% if (lowStock.length === 0) { %>
+        <li class="list-group-item text-muted">Semua stok aman.</li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</div>

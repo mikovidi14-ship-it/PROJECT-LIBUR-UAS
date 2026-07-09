@@ -1,0 +1,121 @@
+<h2 class="mb-4"><%= product ? 'Edit Produk' : 'Tambah Produk' %></h2>
+
+<div class="card card-elegant p-4" style="max-width: 640px;">
+  <% if (error) { %><div class="alert alert-danger py-2"><%= error %></div><% } %>
+  <form method="POST" action="<%= product ? '/products/' + product.id + '/edit' : '/products/new' %>" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label">Nama Produk</label>
+      <input type="text" name="name" class="form-control" value="<%= product ? product.name : '' %>" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Kategori</label>
+      <select name="category_id" class="form-select" required>
+        <% categories.forEach(c => { %>
+        <option value="<%= c.id %>" <%= product && product.category_id === c.id ? 'selected' : '' %>><%= c.name %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Supplier</label>
+      <select name="supplier_id" class="form-select" required>
+        <% suppliers.forEach(s => { %>
+        <option value="<%= s.id %>" <%= product && product.supplier_id === s.id ? 'selected' : '' %>><%= s.name %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Harga Jual (Rp)</label>
+        <input type="number" name="price" class="form-control" value="<%= product ? product.price : '' %>" required min="0">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Harga Modal (Rp)</label>
+        <input type="number" name="cost" class="form-control" value="<%= product ? product.cost : '' %>" required min="0">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Stok Awal</label>
+        <input type="number" name="stock" class="form-control" value="<%= product ? product.stock : 0 %>" required min="0">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Stok Minimum</label>
+        <input type="number" name="min_stock" class="form-control" value="<%= product ? product.min_stock : 5 %>" required min="0">
+      </div>
+    </div>
+
+    <hr class="my-3">
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Gambar Produk (opsional)</label>
+
+      <% if (product && product.image_url) { %>
+      <div class="current-image-preview mb-2">
+        <img id="imgPreview" src="<%= product.image_url %>" alt="Preview">
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" name="remove_image" value="1" id="removeImageCheck">
+          <label class="form-check-label small text-danger" for="removeImageCheck">
+            Hapus gambar ini (pakai ikon otomatis lagi)
+          </label>
+        </div>
+      </div>
+      <% } else { %>
+      <img id="imgPreview" src="" alt="Preview" class="current-image-preview mb-2" style="display:none;">
+      <% } %>
+
+      <div class="upload-box" id="uploadBox">
+        <i class="fa-solid fa-cloud-arrow-up fa-lg mb-1"></i>
+        <div class="small">Klik untuk pilih foto dari komputer</div>
+        <div class="small text-muted">JPG, PNG, WEBP — maks 3MB</div>
+        <input type="file" name="image_file" id="imageFileInput" accept=".jpg,.jpeg,.png,.webp,.gif" hidden>
+      </div>
+
+      <div class="text-center text-muted small my-2">— atau —</div>
+
+      <input type="url" name="image_url" class="form-control" placeholder="Tempel link URL gambar (https://...)">
+      <small class="text-muted">Kalau kedua opsi dikosongkan, sistem otomatis pakai ikon & warna elegan sesuai kategori.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="/products" class="btn btn-outline-secondary">Batal</a>
+  </form>
+</div>
+
+<style>
+  .upload-box {
+    border: 2px dashed #c7c9f2;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    color: #4f46e5;
+    transition: background 0.15s ease;
+  }
+  .upload-box:hover { background: #f5f6fe; }
+  .current-image-preview img, img.current-image-preview {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 12px;
+    display: block;
+    object-fit: cover;
+  }
+</style>
+
+<script>
+  const uploadBox = document.getElementById('uploadBox');
+  const fileInput = document.getElementById('imageFileInput');
+  const preview = document.getElementById('imgPreview');
+
+  uploadBox.addEventListener('click', () => fileInput.click());
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  });
+</script>

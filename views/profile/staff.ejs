@@ -1,0 +1,178 @@
+<div class="mb-4">
+  <div class="staff-profile-card tilt-3d d-flex align-items-center gap-3 flex-wrap <%= isAdmin ? 'admin-gradient' : 'staff-gradient' %>">
+    <div class="customer-avatar">
+      <% if (account.photo_url) { %>
+        <img src="<%= account.photo_url %>" alt="Foto profil">
+      <% } else { %>
+        <i class="fa-solid <%= isAdmin ? 'fa-user-shield' : 'fa-user-tie' %>"></i>
+      <% } %>
+    </div>
+    <div class="flex-grow-1">
+      <h3 class="mb-1 fw-bold">@<%= account.username %></h3>
+      <div class="opacity-75 small">
+        <span class="badge bg-light text-dark text-uppercase"><%= isAdmin ? 'Administrator' : 'Staff' %></span>
+      </div>
+    </div>
+    <div class="text-end">
+      <div class="opacity-75 small">Bergabung sejak</div>
+      <div class="fw-semibold"><%= new Date(stats.memberSince).toLocaleDateString('id-ID') %></div>
+    </div>
+  </div>
+</div>
+
+<% if (success) { %><div class="alert alert-success py-2"><i class="fa-solid fa-circle-check"></i> <%= success %></div><% } %>
+<% if (error) { %><div class="alert alert-danger py-2"><i class="fa-solid fa-triangle-exclamation"></i> <%= error %></div><% } %>
+
+<div class="stat-grid mb-4">
+  <div class="stat-card stat-card-1 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-cash-register"></i></div>
+    <div class="stat-card-value"><%= stats.posSalesHandled %></div>
+    <div class="stat-card-label">Transaksi Kasir Ditangani</div>
+  </div>
+  <div class="stat-card stat-card-2 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+    <div class="stat-card-value">Rp <%= (stats.posRevenueHandled/1000).toFixed(0) %>rb</div>
+    <div class="stat-card-label">Omzet Kasir Ditangani</div>
+  </div>
+  <div class="stat-card stat-card-4 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+    <div class="stat-card-value"><%= stats.onlineOrdersTouched %></div>
+    <div class="stat-card-label">Pesanan Online Ditangani</div>
+  </div>
+  <% if (isAdmin) { %>
+  <div class="stat-card stat-card-7 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-users"></i></div>
+    <div class="stat-card-value"><%= stats.totalStaff %></div>
+    <div class="stat-card-label">Total Staff</div>
+  </div>
+  <div class="stat-card stat-card-5 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-user-group"></i></div>
+    <div class="stat-card-value"><%= stats.totalCustomers %></div>
+    <div class="stat-card-label">Total Pelanggan</div>
+  </div>
+  <div class="stat-card stat-card-6 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-box"></i></div>
+    <div class="stat-card-value"><%= stats.totalProducts %></div>
+    <div class="stat-card-label">Total Produk</div>
+  </div>
+  <% } %>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-image text-primary"></i> Foto Profil</h6>
+      <form method="POST" action="/profile" enctype="multipart/form-data">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="avatar-preview">
+            <% if (account.photo_url) { %>
+              <img src="<%= account.photo_url %>" alt="Foto profil" id="avatarPreviewImg">
+            <% } else { %>
+              <div class="avatar-preview-placeholder" id="avatarPreviewImg"><i class="fa-solid <%= isAdmin ? 'fa-user-shield' : 'fa-user-tie' %>"></i></div>
+            <% } %>
+          </div>
+          <div class="flex-grow-1">
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp,.gif" class="form-control form-control-sm" onchange="previewAvatar(this)">
+            <small class="text-muted d-block mt-1">JPG, PNG, WEBP, atau GIF. Maks 2MB.</small>
+          </div>
+        </div>
+        <% if (account.photo_url) { %>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="remove_photo" value="1" id="removePhoto">
+          <label class="form-check-label small" for="removePhoto">Hapus foto profil saat ini</label>
+        </div>
+        <% } %>
+        <button type="submit" class="btn btn-primary btn-elegant"><i class="fa-solid fa-check"></i> Simpan Foto</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-id-card text-primary"></i> Informasi Akun</h6>
+      <div class="mb-3">
+        <label class="form-label small text-muted">Username</label>
+        <div class="fw-semibold">@<%= account.username %></div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label small text-muted">Peran</label>
+        <div><span class="badge bg-primary text-uppercase"><%= account.role %></span></div>
+      </div>
+      <div class="mb-0">
+        <label class="form-label small text-muted">Bergabung Sejak</label>
+        <div class="fw-semibold"><%= new Date(account.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) %></div>
+      </div>
+      <small class="text-muted d-block mt-3">Username hanya bisa diubah oleh admin melalui pengaturan sistem.</small>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-lock text-primary"></i> Ganti Password</h6>
+      <form method="POST" action="/profile/password">
+        <div class="mb-3">
+          <label class="form-label small">Password Saat Ini</label>
+          <input type="password" name="current_password" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Password Baru</label>
+          <input type="password" name="new_password" class="form-control" minlength="6" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Konfirmasi Password Baru</label>
+          <input type="password" name="confirm_password" class="form-control" minlength="6" required>
+        </div>
+        <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-key"></i> Ubah Password</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-bolt text-primary"></i> Akses Cepat</h6>
+      <div class="d-flex flex-column gap-2">
+        <% if (isAdmin) { %>
+        <a href="/customers" class="quick-action-btn"><i class="fa-solid fa-users"></i> Kelola Pelanggan</a>
+        <a href="/products" class="quick-action-btn"><i class="fa-solid fa-box"></i> Kelola Produk</a>
+        <a href="/reports" class="quick-action-btn"><i class="fa-solid fa-file-lines"></i> Lihat Laporan</a>
+        <a href="/suppliers" class="quick-action-btn"><i class="fa-solid fa-truck"></i> Kelola Supplier</a>
+        <% } else { %>
+        <a href="/sales" class="quick-action-btn"><i class="fa-solid fa-cash-register"></i> Buka Kasir / Penjualan</a>
+        <a href="/orders" class="quick-action-btn"><i class="fa-solid fa-truck-fast"></i> Pesanan Masuk</a>
+        <a href="/products" class="quick-action-btn"><i class="fa-solid fa-box"></i> Cek Stok Produk</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function previewAvatar(input) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const el = document.getElementById('avatarPreviewImg');
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = 'Foto profil';
+      el.replaceWith(img);
+      img.id = 'avatarPreviewImg';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+
+<style>
+  .customer-avatar img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  }
+  .avatar-preview {
+    width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
+    flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .avatar-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar-preview-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    background: #f1f2fb; color: #9ca3af; font-size: 1.6rem;
+  }
+</style>

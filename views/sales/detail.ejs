@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-between align-items-center mb-4 no-print">
+  <h2 class="mb-0">Detail Penjualan</h2>
+  <div>
+    <button onclick="window.print()" class="btn btn-primary btn-elegant"><i class="fa-solid fa-print"></i> Cetak Nota</button>
+    <a href="<%= user.role === 'pelanggan' ? '/my-orders' : '/sales' %>" class="btn btn-outline-secondary">Kembali</a>
+  </div>
+</div>
+
+<div class="card card-elegant p-4 invoice-box" style="max-width: 700px; margin: 0 auto;">
+  <div class="text-center mb-4">
+    <h3 class="fw-bold text-primary mb-0">SIMIP</h3>
+    <div class="text-muted small">Sistem Informasi Manajemen Inventori & Penjualan</div>
+    <div class="text-muted small">Nota Penjualan</div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-6">
+      <div class="small text-muted">No. Nota</div>
+      <div class="fw-semibold">#<%= sale.id.slice(0,8).toUpperCase() %></div>
+    </div>
+    <div class="col-6 text-end">
+      <div class="small text-muted">Tanggal</div>
+      <div class="fw-semibold"><%= new Date(sale.sale_date).toLocaleString('id-ID') %></div>
+    </div>
+    <div class="col-6 mt-2">
+      <div class="small text-muted">Pelanggan</div>
+      <div class="fw-semibold">
+        <% if (customer) { %>
+        <a href="/customers/<%= customer.id %>"><%= customer.name %></a>
+        <% } else { %>
+        <%= sale.customer_name %>
+        <% } %>
+      </div>
+      <% if (customer && customer.phone && customer.phone !== '-') { %>
+      <div class="small text-muted"><i class="fa-solid fa-phone me-1"></i><%= customer.phone %></div>
+      <% } %>
+      <% if (customer && customer.address && customer.address !== '-') { %>
+      <div class="small text-muted"><i class="fa-solid fa-location-dot me-1"></i><%= customer.address %></div>
+      <% } %>
+    </div>
+    <div class="col-6 mt-2 text-end">
+      <div class="small text-muted">Kasir</div>
+      <div class="fw-semibold"><%= cashier ? cashier.username : '-' %></div>
+    </div>
+    <% if (typeof paymentMethod !== 'undefined' && paymentMethod) { %>
+    <div class="col-6 mt-2">
+      <div class="small text-muted">Metode Pembayaran</div>
+      <div class="fw-semibold"><i class="fa-solid <%= paymentMethod.icon %> text-primary me-1"></i><%= paymentMethod.label %></div>
+    </div>
+    <% } %>
+    <% if (typeof paymentStatusMeta !== 'undefined' && paymentStatusMeta) { %>
+    <div class="col-6 mt-2 text-end">
+      <div class="small text-muted">Status Pembayaran</div>
+      <span class="badge bg-<%= paymentStatusMeta.badge %> text-<%= paymentStatusMeta.text %>"><i class="fa-solid <%= paymentStatusMeta.icon %>"></i> <%= paymentStatusMeta.label %></span>
+    </div>
+    <% } %>
+  </div>
+
+  <table class="table table-sm">
+    <thead>
+      <tr><th>Produk</th><th class="text-end">Harga</th><th class="text-center">Qty</th><th class="text-end">Subtotal</th></tr>
+    </thead>
+    <tbody>
+      <% sale.items.forEach(item => { %>
+      <tr>
+        <td><%= item.product_name %></td>
+        <td class="text-end">Rp <%= item.price.toLocaleString('id-ID') %></td>
+        <td class="text-center"><%= item.qty %></td>
+        <td class="text-end">Rp <%= item.subtotal.toLocaleString('id-ID') %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">TOTAL</td>
+        <td class="text-end fw-bold fs-5 text-primary">Rp <%= sale.total.toLocaleString('id-ID') %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <% if (sale.note) { %>
+  <div class="mt-3 p-2 bg-light rounded small">
+    <strong>Catatan:</strong> <%= sale.note %>
+  </div>
+  <% } %>
+
+  <div class="text-center text-muted small mt-4">Terima kasih atas pembelian Anda</div>
+</div>
+
+<style>
+  @media print {
+    .sidebar, .no-print { display: none !important; }
+    .content { padding: 0 !important; }
+    .invoice-box { box-shadow: none !important; }
+  }
+</style>

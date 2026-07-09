@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Produk</h2>
+    <p class="text-muted mb-0"><%= products.length %> produk terdaftar</p>
+  </div>
+  <% if (user.role === 'admin') { %>
+  <a href="/products/new" class="btn btn-primary btn-elegant"><i class="fa-solid fa-plus"></i> Tambah Produk</a>
+  <% } %>
+</div>
+
+<div class="product-grid">
+  <% products.forEach(p => { %>
+  <div class="product-card">
+    <div class="product-card-media" <% if (p.visual.type === 'icon') { %>style="background: <%= p.visual.gradient %>;"<% } %>>
+      <% if (p.visual.type === 'image') { %>
+        <img src="<%= p.visual.src %>" alt="<%= p.name %>" onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\'fa-solid fa-box product-card-icon\'></i>';this.parentElement.style.background='linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';">
+      <% } else { %>
+        <i class="fa-solid <%= p.visual.icon %> product-card-icon"></i>
+      <% } %>
+      <% if (p.stock <= p.min_stock) { %>
+        <span class="product-card-badge badge-low"><i class="fa-solid fa-triangle-exclamation"></i> Stok Menipis</span>
+      <% } %>
+    </div>
+    <div class="product-card-body">
+      <div class="product-card-category"><%= p.category ? p.category.name : '-' %></div>
+      <h5 class="product-card-title"><%= p.name %></h5>
+      <div class="product-card-price">Rp <%= p.price.toLocaleString('id-ID') %></div>
+      <% if (p.reviewCount > 0) { %>
+      <div class="mb-2" style="font-size:0.8rem;">
+        <i class="fa-solid fa-star" style="color:#f7b733;"></i>
+        <span class="fw-semibold"><%= p.avgRating.toFixed(1) %></span>
+        <span class="text-muted">(<%= p.reviewCount %> ulasan)</span>
+      </div>
+      <% } %>
+      <div class="product-card-meta">
+        <span><i class="fa-solid fa-warehouse"></i> Stok: <strong><%= p.stock %></strong></span>
+        <span><i class="fa-solid fa-truck"></i> <%= p.supplier ? p.supplier.name : '-' %></span>
+      </div>
+      <% if (user.role === 'admin') { %>
+      <div class="product-card-actions">
+        <a href="/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-primary flex-fill"><i class="fa-solid fa-pen"></i> Edit</a>
+        <form action="/products/<%= p.id %>/delete" method="POST" onsubmit="return confirm('Hapus produk ini?')">
+          <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <% }) %>
+
+  <% if (products.length === 0) { %>
+  <div class="text-center text-muted py-5 w-100">
+    <i class="fa-solid fa-box-open fa-3x mb-3"></i>
+    <p>Belum ada produk.</p>
+  </div>
+  <% } %>
+</div>

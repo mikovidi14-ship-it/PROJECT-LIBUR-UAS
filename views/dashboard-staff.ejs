@@ -1,0 +1,178 @@
+<div class="dash-welcome-banner mb-3">
+  <div class="dash-welcome-icon">👋</div>
+  <div>
+    <div class="dash-welcome-greeting" data-greeting-prefix data-user-name="<%= user.name || user.username %>">Selamat Datang</div>
+    <div class="dash-welcome-sub">Semangat kerja hari ini di SIMIP!</div>
+  </div>
+</div>
+
+<div class="dashboard-header mb-4">
+  <h2 class="mb-1"><i class="fa-solid fa-gauge-high text-primary"></i> Dashboard Staff</h2>
+  <p class="text-muted mb-0">Antrian kerja hari ini — urutkan dari yang paling lama menunggu</p>
+</div>
+
+<div class="stat-grid mb-4">
+  <a href="/orders?status=pending" class="stat-card stat-card-8 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-receipt"></i></div>
+    <div class="stat-card-value"><%= awaitingPaymentConfirm.length %></div>
+    <div class="stat-card-label">Bukti Bayar Perlu Diverifikasi</div>
+  </a>
+  <a href="/orders?status=diproses" class="stat-card stat-card-1 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-box-open"></i></div>
+    <div class="stat-card-value"><%= readyToShip.length %></div>
+    <div class="stat-card-label">Pesanan Siap Dikirim</div>
+  </a>
+  <a href="/orders?status=diantar" class="stat-card stat-card-4 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+    <div class="stat-card-value"><%= outForDelivery.length %></div>
+    <div class="stat-card-label">Sedang Diantar</div>
+  </a>
+  <a href="/products" class="stat-card stat-card-3 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <div class="stat-card-value"><%= lowStock.length %></div>
+    <div class="stat-card-label">Stok Menipis</div>
+  </a>
+  <a href="/transactions" class="stat-card stat-card-2 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-right-left"></i></div>
+    <div class="stat-card-value"><%= totalTransactionsToday %></div>
+    <div class="stat-card-label">Transaksi Hari Ini</div>
+  </a>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- ===== Bukti pembayaran perlu diverifikasi ===== -->
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0"><i class="fa-solid fa-receipt text-info"></i> Perlu Verifikasi Pembayaran</h6>
+        <span class="chip"><%= awaitingPaymentConfirm.length %> pesanan</span>
+      </div>
+      <% if (awaitingPaymentConfirm.length > 0) { %>
+      <ul class="list-unstyled mb-0">
+        <% awaitingPaymentConfirm.forEach((s, idx) => { %>
+        <li class="d-flex align-items-center justify-content-between py-2 <%= idx < awaitingPaymentConfirm.length - 1 ? 'border-bottom' : '' %>">
+          <div>
+            <div class="fw-semibold small">
+              <span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span> <%= s.customer_name %>
+            </div>
+            <div class="text-muted" style="font-size:0.72rem;">
+              Rp <%= s.total.toLocaleString('id-ID') %> · menunggu sejak <%= new Date(s.sale_date).toLocaleString('id-ID') %>
+            </div>
+          </div>
+          <a href="/orders/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i> Cek</a>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+        <p class="mb-0 small">Tidak ada bukti pembayaran yang perlu diverifikasi.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- ===== Siap dikirim (diproses -> diantar) ===== -->
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0"><i class="fa-solid fa-box-open text-primary"></i> Siap Dikirim</h6>
+        <span class="chip"><%= readyToShip.length %> pesanan</span>
+      </div>
+      <% if (readyToShip.length > 0) { %>
+      <ul class="list-unstyled mb-0">
+        <% readyToShip.forEach((s, idx) => { %>
+        <li class="d-flex align-items-center justify-content-between py-2 <%= idx < readyToShip.length - 1 ? 'border-bottom' : '' %>">
+          <div>
+            <div class="fw-semibold small">
+              <span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span> <%= s.customer_name %>
+            </div>
+            <div class="text-muted" style="font-size:0.72rem;">
+              <%= s.items.length %> produk · dikonfirmasi <%= new Date(s.sale_date).toLocaleString('id-ID') %>
+            </div>
+          </div>
+          <a href="/orders/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-truck-fast"></i> Kirim</a>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+        <p class="mb-0 small">Tidak ada pesanan yang menunggu dikirim.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- ===== Sedang diantar (diantar -> menunggu_konfirmasi_selesai) ===== -->
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0"><i class="fa-solid fa-truck-fast text-warning"></i> Sedang Diantar</h6>
+        <span class="chip"><%= outForDelivery.length %> pesanan</span>
+      </div>
+      <% if (outForDelivery.length > 0) { %>
+      <ul class="list-unstyled mb-0">
+        <% outForDelivery.forEach((s, idx) => { %>
+        <li class="d-flex align-items-center justify-content-between py-2 <%= idx < outForDelivery.length - 1 ? 'border-bottom' : '' %>">
+          <div>
+            <div class="fw-semibold small">
+              <span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span> <%= s.customer_name %>
+            </div>
+            <div class="text-muted" style="font-size:0.72rem;">
+              <%= s.shipping_address || 'Alamat belum diisi' %><% if (s.courier) { %> · <%= s.courier %><% } %>
+            </div>
+          </div>
+          <a href="/orders/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-flag-checkered"></i> Tandai Sampai</a>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+        <p class="mb-0 small">Tidak ada pesanan yang sedang dalam perjalanan.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- ===== Peringatan stok menipis ===== -->
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 h-100">
+      <h6 class="mb-3 text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Peringatan Stok Menipis</h6>
+      <% if (lowStock.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table table-sm mb-0 align-middle">
+          <thead><tr><th>Produk</th><th>Stok Saat Ini</th><th>Stok Minimum</th></tr></thead>
+          <tbody>
+            <% lowStock.forEach(p => { %>
+            <tr>
+              <td><%= p.name %></td>
+              <td><span class="badge badge-low"><%= p.stock %></span></td>
+              <td><%= p.min_stock %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+        <p class="mb-0">Semua stok dalam kondisi aman.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="card card-elegant p-4 mb-4">
+  <h6 class="mb-3"><i class="fa-solid fa-list-check text-primary"></i> Pintasan Cepat</h6>
+  <div class="row g-2">
+    <div class="col-md-3 col-6"><a href="/orders" class="quick-action-btn w-100"><i class="fa-solid fa-truck-fast"></i> Pesanan Masuk</a></div>
+    <div class="col-md-3 col-6"><a href="/products" class="quick-action-btn w-100"><i class="fa-solid fa-box"></i> Produk</a></div>
+    <div class="col-md-3 col-6"><a href="/transactions" class="quick-action-btn w-100"><i class="fa-solid fa-right-left"></i> Transaksi Stok</a></div>
+    <div class="col-md-3 col-6"><a href="/sales" class="quick-action-btn w-100"><i class="fa-solid fa-cash-register"></i> Penjualan (POS)</a></div>
+  </div>
+</div>

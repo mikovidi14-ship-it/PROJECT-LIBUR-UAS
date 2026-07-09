@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Pelanggan</h2>
+    <p class="text-muted mb-0"><%= customers.length %> pelanggan terdaftar</p>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card card-elegant p-3">
+      <h6>Tambah Pelanggan</h6>
+      <form method="POST" action="/customers/new">
+        <input type="text" name="name" class="form-control mb-2" placeholder="Nama pelanggan" required>
+        <input type="text" name="phone" class="form-control mb-2" placeholder="No. HP">
+        <input type="text" name="address" class="form-control mb-2" placeholder="Alamat">
+        <button class="btn btn-primary w-100">Tambah</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-elegant p-3">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Nama</th><th>No. HP</th><th>Alamat</th><th>Total Belanja</th><th>Transaksi</th>
+              <% if (user.role === 'admin') { %><th>Aksi</th><% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% customers.forEach(c => { %>
+            <tr>
+              <td><a href="/customers/<%= c.id %>" class="fw-semibold text-decoration-none"><%= c.name %></a></td>
+              <td><%= c.phone %></td>
+              <td><%= c.address %></td>
+              <td class="fw-semibold text-primary">Rp <%= c.totalBelanja.toLocaleString('id-ID') %></td>
+              <td><span class="chip"><%= c.totalTransaksi %>x</span></td>
+              <% if (user.role === 'admin') { %>
+              <td>
+                <a href="/customers/<%= c.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i></a>
+                <form action="/customers/<%= c.id %>/delete" method="POST" class="d-inline" onsubmit="return confirm('Hapus pelanggan ini?')">
+                  <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                </form>
+              </td>
+              <% } %>
+            </tr>
+            <% }) %>
+            <% if (customers.length === 0) { %>
+            <tr><td colspan="6" class="text-center text-muted py-4">Belum ada pelanggan.</td></tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

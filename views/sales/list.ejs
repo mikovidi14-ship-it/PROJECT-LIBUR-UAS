@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Penjualan</h2>
+    <p class="text-muted mb-0"><%= sales.length %> transaksi penjualan</p>
+  </div>
+  <a href="/sales/new" class="btn btn-primary btn-elegant"><i class="fa-solid fa-cart-plus"></i> Penjualan Baru</a>
+</div>
+
+<div class="card card-elegant p-3">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>No. Nota</th><th>Tanggal</th><th>Pelanggan</th><th>Item</th><th>Total</th><th>Kasir</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sales.forEach(s => { %>
+        <tr>
+          <td><span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span></td>
+          <td><%= new Date(s.sale_date).toLocaleString('id-ID') %></td>
+          <td>
+            <% if (s.customer_id) { %>
+            <a href="/customers/<%= s.customer_id %>" class="text-decoration-none"><%= s.customer_name %></a>
+            <% } else { %>
+            <%= s.customer_name %>
+            <% } %>
+          </td>
+          <td><%= s.items.length %> produk</td>
+          <td class="fw-semibold text-primary">Rp <%= s.total.toLocaleString('id-ID') %></td>
+          <td><%= s.cashier ? s.cashier.username : '-' %></td>
+          <td><a href="/sales/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-receipt"></i> Detail</a></td>
+        </tr>
+        <% }) %>
+        <% if (sales.length === 0) { %>
+        <tr><td colspan="7" class="text-center text-muted py-4">Belum ada transaksi penjualan.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

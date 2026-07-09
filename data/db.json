@@ -1,0 +1,2272 @@
+{
+  "users": [
+    {
+      "id": "c49b29a9-8006-4d8c-82ea-87536e048eac",
+      "username": "admin",
+      "password": "$2b$10$m8pElwn.Pti6hwbhJlaNQuKbh/zHwyp3tmHW/ta9ZdQhJ8VNKqUzC",
+      "role": "admin",
+      "created_at": "2026-07-08T04:41:22.719Z",
+      "photo_url": "/uploads/avatar-7f03da8b-dabf-4b8b-9ee1-6f0bc3ad27b3.jpg"
+    },
+    {
+      "id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "username": "staff",
+      "password": "$2b$10$Y3yNjCYGUMtIpqZnFhxEKOc3g2oaKOWdq1KH3PpxUgnaXtFsW6QVK",
+      "role": "staff",
+      "created_at": "2026-07-08T04:41:22.831Z",
+      "photo_url": "/uploads/avatar-0ddc1000-7699-44f6-a794-18e84f8f8dca.jpeg"
+    },
+    {
+      "id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "username": "Mixo Vidianto",
+      "password": "$2b$10$OLqXA5bXDXrjnVOyhSbz1.IKTGYVR0LwdoUKawbkVwlV647bPWq02",
+      "role": "admin",
+      "created_at": "2026-07-08T06:19:24.092Z",
+      "photo_url": "/uploads/avatar-9c3590b2-0ea5-4f3b-939c-3971376070c7.jpg"
+    },
+    {
+      "id": "9827568f-6baf-4ec3-9573-29605b59afa9",
+      "username": "Rini Anggraini",
+      "password": "$2b$10$hyjJLIZiqQw0Eodlg00VWOlbxdV2KkxySWyjo2Gam8.BNi/.8kGZ.",
+      "role": "staff",
+      "created_at": "2026-07-08T07:50:11.806Z",
+      "photo_url": "/uploads/avatar-95e9c706-b809-4103-9da3-bb18e8bec226.jpeg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "name": "Elektronik"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "861e3cd3-58ca-4d24-b1ac-1d54978eec17",
+      "name": "CV Sumber Makmur",
+      "contact": "0812-1111-2222",
+      "address": "Jakarta"
+    },
+    {
+      "id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "name": "PT Global Distribusi",
+      "contact": "0813-3333-4444",
+      "address": "Surabaya"
+    },
+    {
+      "id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "name": "PT Mixo Vidianto Sukses JAYA Makmur",
+      "contact": "0857-8102-1728",
+      "address": "TANGERANG ( POESAT )"
+    }
+  ],
+  "products": [
+    {
+      "id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "name": "IPHONE 17 PRO MAX",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 35999000,
+      "cost": 500000000,
+      "stock": 0,
+      "min_stock": 5,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPptX60cKaBchSZzld91OMu1Ape1cvoa2nktUkDL3bHA&s=10",
+      "created_at": "2026-07-08T06:24:06.092Z"
+    },
+    {
+      "id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "name": "OPPO Find X9 Ultra",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 31999000,
+      "cost": 500000000,
+      "stock": 0,
+      "min_stock": 25,
+      "image_url": "https://opsg-imgcdn-sg.heytapimg.com/epb/202607/03/nEJu8IFl2E6EI5GO.png?x-amz-process=image/format,webp/quality,Q_80",
+      "created_at": "2026-07-08T06:27:35.209Z"
+    },
+    {
+      "id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+      "name": "ASUS ROG Phone 6 Pro 5G Dual SIM Gaming Smartphone",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 20000000,
+      "cost": 1000000000,
+      "stock": 0,
+      "min_stock": 15,
+      "image_url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQXXKfXAIsN89cjPrUwROCIHRTlWg26YhgM-w1moxK8xHEQT5alZd8_lZo70IXeBY0elfHNY-9o9zeC55SPtA2I3t4eNaA5aw",
+      "created_at": "2026-07-08T06:30:10.361Z"
+    },
+    {
+      "id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+      "name": "Falcon Supernova iPhone 6 Pink Diamond",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 751000000,
+      "cost": 9999999999,
+      "stock": 0,
+      "min_stock": 28,
+      "image_url": "https://static.retailworldvn.com/News/0/image5-845x442-1.jpg",
+      "created_at": "2026-07-08T06:32:50.633Z"
+    },
+    {
+      "id": "bff99e99-6b84-4206-a678-789f48bc8958",
+      "name": "SAMSUNG GALAXY s26 ULTRA",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "861e3cd3-58ca-4d24-b1ac-1d54978eec17",
+      "price": 26000000,
+      "cost": 500000000,
+      "stock": 0,
+      "min_stock": 108,
+      "image_url": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT5NqBsXjkXYkEAplMmEdDK3WK1aHUvSZPxZ94-k6vlrMLQYqAMnGB9fxwx5wiL5yU5WabTCxSv7XcmMOw6zqdyz8DF-KLpokgTqrs9nJ5ceWCX5YwO46Tzrg",
+      "created_at": "2026-07-08T06:36:20.414Z"
+    },
+    {
+      "id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "name": "XIAOMI 17 ULTA",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 19999000,
+      "cost": 2000000000,
+      "stock": 0,
+      "min_stock": 1000,
+      "image_url": "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-17-ultra/pc/489eb45a3fd47a6c3c09a0a94fa5bace.jpg?f=webp",
+      "created_at": "2026-07-08T06:41:12.228Z"
+    },
+    {
+      "id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "name": "POCO X8 PRO ",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 5000000,
+      "cost": 20000000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://i02.appmifile.com/118_operator_sg/26/06/2026/d047e037201de97843f80779fb3c24da.jpg",
+      "created_at": "2026-07-08T06:42:52.949Z"
+    },
+    {
+      "id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "name": "GOOGLE PIXEL 10 Pro",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 17000000,
+      "cost": 17000000,
+      "stock": 0,
+      "min_stock": 1000,
+      "image_url": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTKViJZ1VXlhyxUd9nryv3o9Wn8Z2fWlggvYY-Lp6NkuCRXUMk6iR6FoCksXEDDUhWSI938_JPhjj8X-SzISB01iYy0bJkJuv3PlMqJhlmGu4j2h5uY7eSR",
+      "created_at": "2026-07-08T06:46:40.897Z"
+    },
+    {
+      "id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "name": "HP Omen MAX 16 AK0777AX",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 55000000,
+      "cost": 10000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://i0.wp.com/www.amd-id.com/wp-content/uploads/2025/10/download-18.jpeg?resize=696%2C491&ssl=1",
+      "created_at": "2026-07-08T06:50:05.346Z"
+    },
+    {
+      "id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 53000000,
+      "cost": 10000,
+      "stock": 0,
+      "min_stock": 10,
+      "image_url": "https://i0.wp.com/www.amd-id.com/wp-content/uploads/2025/10/download-19.jpeg?resize=696%2C427&ssl=1",
+      "created_at": "2026-07-08T06:52:30.590Z"
+    },
+    {
+      "id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "name": "MSI Stealth A16 MERCEDES AMG AI+",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 48000000,
+      "cost": 1000,
+      "stock": 0,
+      "min_stock": 40,
+      "image_url": "https://i0.wp.com/www.amd-id.com/wp-content/uploads/2025/10/download-21.jpeg?resize=696%2C391&ssl=1",
+      "created_at": "2026-07-08T07:42:00.034Z"
+    },
+    {
+      "id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "name": "ASUS ROG Strix G16 G614FR – ",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "c87d97ac-2bac-4598-a074-73feda7cd69e",
+      "price": 54000000,
+      "cost": 1,
+      "stock": 0,
+      "min_stock": 5,
+      "image_url": "https://i0.wp.com/www.amd-id.com/wp-content/uploads/2025/10/ASUS-Ryzen-9955HX3D-laptops.jpg?resize=696%2C436&ssl=1",
+      "created_at": "2026-07-08T07:43:42.641Z"
+    },
+    {
+      "id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+      "name": "PLAYSTATION 1",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "price": 500000,
+      "cost": 10000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ElQ-50Rg9R10V5qM9gK2ZCn9U9ctcR5Ktl-G9s-TwA&s=10",
+      "created_at": "2026-07-08T09:06:38.434Z"
+    },
+    {
+      "id": "e6483399-e134-4f06-9693-e1fb16353484",
+      "name": "PLAYSTATION 2 ",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "price": 1500000,
+      "cost": 100000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH_P0stq4T-V_GspVrQ_2jV2uh9ZjdHxnJZSfgF4ehXA&s=10",
+      "created_at": "2026-07-08T09:08:05.901Z"
+    },
+    {
+      "id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+      "name": "PLAYSTATION 3",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "price": 2000000,
+      "cost": 100000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY1KdAuT96P12kShsNlwTQ_iIKZUg4zzYO8c7gu9WGMA&s=10",
+      "created_at": "2026-07-08T09:09:59.571Z"
+    },
+    {
+      "id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+      "name": "PLAYSTATION 4",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "price": 2900000,
+      "cost": 100000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOzVkHlKFWVUHZ_wXhYAy_9kwXu3GCNIrn8JplIEv34g&s=10",
+      "created_at": "2026-07-08T09:12:04.365Z"
+    },
+    {
+      "id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+      "name": "PLAYSTATION 5",
+      "category_id": "1199df5c-17fa-47c4-9b84-f1e9c2bc1011",
+      "supplier_id": "dd711b17-d4b5-4c9c-a4fc-23f7716b16bb",
+      "price": 15000000,
+      "cost": 200000000,
+      "stock": 0,
+      "min_stock": 100,
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxgwN1rDW4KWne60uMLqQLvA4HlxsIJqo2M-sxGEpipg&s=10",
+      "created_at": "2026-07-08T09:12:58.803Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "ceb38053-3dbc-4b06-b5ad-72fe85e4fbfc",
+      "type": "out",
+      "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-06-29T04:41:22.961Z"
+    },
+    {
+      "id": "496c9986-2131-4745-881b-2aa2eaba0ca2",
+      "type": "out",
+      "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+      "quantity": 3,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-02T04:41:22.962Z"
+    },
+    {
+      "id": "3dc642f9-92a4-424d-bb10-61c00564acb1",
+      "type": "out",
+      "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+      "quantity": 3,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-05T04:41:22.962Z"
+    },
+    {
+      "id": "0bb8e890-07cf-4d7c-b580-9e433b2243cb",
+      "type": "out",
+      "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+      "quantity": 4,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-08T04:41:22.963Z"
+    },
+    {
+      "id": "e7939e54-1765-4d6c-9a33-f4ced35082c0",
+      "type": "out",
+      "product_id": "a021c4b1-8964-4ca4-9a86-579981cc3141",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-06-30T04:41:22.963Z"
+    },
+    {
+      "id": "748a5bc8-32db-4030-b0d7-70974cfc7d42",
+      "type": "out",
+      "product_id": "a021c4b1-8964-4ca4-9a86-579981cc3141",
+      "quantity": 4,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-03T04:41:22.964Z"
+    },
+    {
+      "id": "010bdb33-438a-4fe0-bf2d-be3e7e87ae12",
+      "type": "out",
+      "product_id": "a021c4b1-8964-4ca4-9a86-579981cc3141",
+      "quantity": 1,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-06T04:41:22.964Z"
+    },
+    {
+      "id": "a6574a7e-c937-480c-b2ae-0795a4c264d0",
+      "type": "out",
+      "product_id": "af141fe9-ae7f-4d54-aae4-c32df5ef8aa5",
+      "quantity": 3,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-06-28T04:41:22.965Z"
+    },
+    {
+      "id": "761ccb4f-c96b-418d-b6be-5c7899a0acd5",
+      "type": "out",
+      "product_id": "af141fe9-ae7f-4d54-aae4-c32df5ef8aa5",
+      "quantity": 3,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-01T04:41:22.965Z"
+    },
+    {
+      "id": "03f4e72e-fca9-4a55-9d84-310b134edd0f",
+      "type": "out",
+      "product_id": "af141fe9-ae7f-4d54-aae4-c32df5ef8aa5",
+      "quantity": 4,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-04T04:41:22.966Z"
+    },
+    {
+      "id": "87cc4e9f-cf3f-430c-8799-531e44c40a7a",
+      "type": "out",
+      "product_id": "af141fe9-ae7f-4d54-aae4-c32df5ef8aa5",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-07T04:41:22.966Z"
+    },
+    {
+      "id": "df152e74-2bf5-4ea7-a536-65361ae1c8de",
+      "type": "out",
+      "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+      "quantity": 1,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-06-29T04:41:22.967Z"
+    },
+    {
+      "id": "92f0b2c8-768a-47f4-9fda-4b1f12d0a6ab",
+      "type": "out",
+      "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+      "quantity": 4,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-02T04:41:22.967Z"
+    },
+    {
+      "id": "d11ff02a-b772-49f9-a666-6d6bfd6fe78c",
+      "type": "out",
+      "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-05T04:41:22.967Z"
+    },
+    {
+      "id": "3501daf5-272e-4298-9880-708baf64e9d8",
+      "type": "out",
+      "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+      "quantity": 4,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-08T04:41:22.968Z"
+    },
+    {
+      "id": "6b138a87-ed17-4d4b-b7b9-3e55abc779b1",
+      "type": "out",
+      "product_id": "75e9bc4c-4e8a-4c9d-b6d0-71358528cca5",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-06-30T04:41:22.968Z"
+    },
+    {
+      "id": "02024be8-d049-4bbe-8c17-f6dc18362eca",
+      "type": "out",
+      "product_id": "75e9bc4c-4e8a-4c9d-b6d0-71358528cca5",
+      "quantity": 2,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-03T04:41:22.968Z"
+    },
+    {
+      "id": "1d383dca-aa41-4473-b538-a4c76fb3299a",
+      "type": "out",
+      "product_id": "75e9bc4c-4e8a-4c9d-b6d0-71358528cca5",
+      "quantity": 3,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan",
+      "transaction_date": "2026-07-06T04:41:22.969Z"
+    },
+    {
+      "id": "80e41e40-414b-4959-8c43-9b019313bec8",
+      "type": "out",
+      "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+      "quantity": 20,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "Penjualan #cec73b55",
+      "transaction_date": "2026-07-08T06:17:21.291Z",
+      "sale_id": "cec73b55-00dd-4e10-9901-d9e82fcfaff4"
+    },
+    {
+      "id": "cb9831ab-3095-496c-ace3-d8a6ce87a0b9",
+      "type": "out",
+      "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "quantity": 5,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "7a2fd9b0-959d-4edf-bafb-2a011b70df51",
+      "type": "out",
+      "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "f740b6b7-17e3-4ba8-937f-1b83109edcc4",
+      "type": "out",
+      "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "66764633-881a-40d9-add6-01af92fc5d7d",
+      "type": "out",
+      "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "ed631f91-6db1-4f65-b544-cdfd0b5e38b4",
+      "type": "out",
+      "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "fc7d303b-d2e0-4cd2-acf0-81891b7b96aa",
+      "type": "out",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "a437ee6a-45bc-4c86-a0b5-5721dc109bc2",
+      "type": "out",
+      "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "6a832557-606d-466e-a5f7-50b5c0dab9d4",
+      "type": "out",
+      "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "61c5af66-4a9b-47da-b39d-907006ae70e7",
+      "type": "out",
+      "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "7d319f65-cdae-486a-94df-9c0506681c88",
+      "type": "out",
+      "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "437153e1-6132-4630-a526-986d886dc0e6",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "8957358b-d858-4937-a57d-5731c5bdfe3b",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 1,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #896b1b01",
+      "transaction_date": "2026-07-08T07:53:49.605Z",
+      "sale_id": "896b1b01-3554-444b-868d-3f2262f6dce1"
+    },
+    {
+      "id": "ec192628-2278-4531-86bf-c16d42c5dfa4",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 1,
+      "user_id": "9827568f-6baf-4ec3-9573-29605b59afa9",
+      "note": "Penjualan #80f1af13",
+      "transaction_date": "2026-07-08T07:54:50.249Z",
+      "sale_id": "80f1af13-155f-4b17-b8eb-6c712d86d7bd"
+    },
+    {
+      "id": "ddacd1e8-f112-487c-965d-3880f928be03",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 1,
+      "user_id": "9827568f-6baf-4ec3-9573-29605b59afa9",
+      "note": "Penjualan #80f1af13",
+      "transaction_date": "2026-07-08T07:54:50.249Z",
+      "sale_id": "80f1af13-155f-4b17-b8eb-6c712d86d7bd"
+    },
+    {
+      "id": "b3ffd545-3684-4939-8de1-49dce4f12818",
+      "type": "out",
+      "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "f4ef115d-ae46-4084-9209-a2e6a69adeec",
+      "type": "out",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "723d9506-1783-4e4e-b8ab-d6acefc83506",
+      "type": "out",
+      "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "aa7e81f5-d6bd-4880-aca5-9a545cc0023c",
+      "type": "out",
+      "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "cddd34b8-fec0-4136-b941-6e6fcef8ffa8",
+      "type": "out",
+      "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "quantity": 5,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "7fd27b13-5e04-4f27-9cdc-74b5e965a0a9",
+      "type": "out",
+      "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "quantity": 5,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "546b0beb-dadd-4e9d-8bd9-204adbba84ce",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 5,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "67d13a56-fc0d-45cf-bab7-191d19645c13",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 5,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #5a7aa506",
+      "transaction_date": "2026-07-08T08:05:08.082Z",
+      "sale_id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb"
+    },
+    {
+      "id": "34b24b0e-8b8c-47d8-a1ca-eccd7b61ba37",
+      "type": "out",
+      "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "quantity": 15,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "1ff122a5-e640-4c62-976a-0803ec50c541",
+      "type": "out",
+      "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "quantity": 99,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "1608d54c-d645-4ee8-aaf0-f5a9353c5af9",
+      "type": "out",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 19998,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "ed15b658-fb49-43f7-9315-52b75f7e4d52",
+      "type": "out",
+      "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "quantity": 133,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "1ac1c323-ce44-4f12-bc10-c82517b55677",
+      "type": "out",
+      "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "quantity": 110,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "437235dc-9451-40e8-a017-993af49a872f",
+      "type": "out",
+      "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "quantity": 100,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "cfe3c1e0-4fdc-4b94-8e8d-94891436374c",
+      "type": "out",
+      "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "quantity": 100,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "be9ad65d-931a-4421-91de-110aa1d1a312",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 100,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "3ae56f51-273d-431f-9b2b-8771931622b0",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 93,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "Pembelian online #962a5257",
+      "transaction_date": "2026-07-08T08:25:11.218Z",
+      "sale_id": "962a5257-3e84-4fc6-8bda-4685f38ba72d"
+    },
+    {
+      "id": "77be38d7-249c-4432-8b13-c8168842253b",
+      "type": "in",
+      "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "quantity": 500,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "restock pt mixo",
+      "transaction_date": "2026-07-08T08:56:26.238Z"
+    },
+    {
+      "id": "09711a09-5407-4613-bb81-7fc7f1c19f14",
+      "type": "in",
+      "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "quantity": 500,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "restock pt mixo",
+      "transaction_date": "2026-07-08T08:56:39.737Z"
+    },
+    {
+      "id": "ceca1e03-4b50-4ef0-8740-16e92b62feee",
+      "type": "in",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 500,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "restock pt mixo",
+      "transaction_date": "2026-07-08T08:59:49.233Z"
+    },
+    {
+      "id": "742d4aa6-3883-4f47-8615-093785f68a3a",
+      "type": "in",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 500,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "restock pt mixo",
+      "transaction_date": "2026-07-08T09:00:05.222Z"
+    },
+    {
+      "id": "69e8c648-bd08-423e-8673-18de5c644257",
+      "type": "in",
+      "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+      "quantity": 343,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "restock pt mixo",
+      "transaction_date": "2026-07-08T09:00:42.053Z"
+    },
+    {
+      "id": "b1793cd6-b4b7-4f57-ab00-39530b8268f4",
+      "type": "out",
+      "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "954427ed-0f13-40c0-b894-0f19b6fb0a88",
+      "type": "out",
+      "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "2edb2c38-b592-4dc1-8c33-4c88aeca7fbd",
+      "type": "out",
+      "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "2f943417-9a85-42d4-a154-06c637526633",
+      "type": "out",
+      "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "57ba18b4-aa5c-4592-8155-9afecd1abb4e",
+      "type": "out",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "3ab31d0c-48f9-457a-93d4-cff6164ad46e",
+      "type": "out",
+      "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "quantity": 2,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "7bf4dd20-6766-4f3e-8167-47c4a9d393ac",
+      "type": "out",
+      "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "quantity": 2,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "d33b4873-e206-45d9-a67a-6d2a3d26941b",
+      "type": "out",
+      "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "2c788f84-99ef-4099-8477-3d78b801e15c",
+      "type": "out",
+      "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "ba6b4cde-19c1-427d-871f-f6dc824761f4",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "c67e41fb-a0cb-44d0-ac13-65b48cfeb920",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "3a9deee6-7e2b-42d1-b291-a9aa3e233b40",
+      "type": "out",
+      "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "e7462def-dccd-4e64-bdc2-e20111194311",
+      "type": "out",
+      "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "753c9e2a-940a-4436-970a-8af420aa91b3",
+      "type": "out",
+      "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "a14a0f21-1510-46db-9a20-e478615668fe",
+      "type": "out",
+      "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "b85f82da-57ca-4330-9f7a-5743b22b3430",
+      "type": "out",
+      "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+      "quantity": 1,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "Pembelian online #aeefa923",
+      "transaction_date": "2026-07-09T01:11:39.882Z",
+      "sale_id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed"
+    },
+    {
+      "id": "46c4a318-bc4c-48ce-a4e4-c9cd3258b067",
+      "type": "out",
+      "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "quantity": 500,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "9e99ef99-d974-40c2-8b42-e318cf257ed0",
+      "type": "out",
+      "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+      "quantity": 499,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "ecfc12cb-9998-41ca-9684-69e96a4a2163",
+      "type": "out",
+      "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+      "quantity": 49999,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "a604e2dc-2feb-4f2b-9666-021fb39a4376",
+      "type": "out",
+      "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+      "quantity": 198,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "613d02f6-6a7b-4358-8019-0113ae9d3b23",
+      "type": "out",
+      "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+      "quantity": 497,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "830cd63a-1272-4979-881b-12beee9387c5",
+      "type": "out",
+      "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+      "quantity": 19999999999999,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "efdeb831-b7dc-4445-bd4c-9172600e2ad6",
+      "type": "out",
+      "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+      "quantity": 863,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "f3a3b5f5-af4f-4fb3-b32f-bc5fe5d790a6",
+      "type": "out",
+      "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+      "quantity": 9886,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "108826ce-0686-4b0e-a322-42b6100fcf21",
+      "type": "out",
+      "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+      "quantity": 1893,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "3525fb60-1900-431b-8f9d-230d6e69875f",
+      "type": "out",
+      "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+      "quantity": 893,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "2ecb301a-0398-4fab-8c51-01c1a6af3b0a",
+      "type": "out",
+      "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+      "quantity": 1892,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "9e7ebfe3-04c5-4baa-9421-02b500b25b66",
+      "type": "out",
+      "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+      "quantity": 1000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "a2f9a59d-42ad-47cd-b5a1-7e4341cb40ce",
+      "type": "out",
+      "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+      "quantity": 1000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "58b70b76-320c-489c-824e-aef7213dc103",
+      "type": "out",
+      "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+      "quantity": 1000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "2d47d4e7-e526-4f6d-a390-266127470924",
+      "type": "out",
+      "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+      "quantity": 1000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "a9f890c5-addb-43da-8369-2eb44c3477ce",
+      "type": "out",
+      "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+      "quantity": 1000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "Pembelian online #570dc9d2",
+      "transaction_date": "2026-07-09T06:16:39.813Z",
+      "sale_id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c"
+    },
+    {
+      "id": "49f6b232-50ce-4268-90be-9ccf26073ef2",
+      "type": "out",
+      "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+      "quantity": 499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #d8109e09",
+      "transaction_date": "2026-07-09T06:20:26.251Z",
+      "sale_id": "d8109e09-c26b-4ddc-8efc-d2ed3987768b"
+    },
+    {
+      "id": "eba01a7d-e1ef-403e-a97c-1b5c13390c6b",
+      "type": "out",
+      "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+      "quantity": 1499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #2c95d231",
+      "transaction_date": "2026-07-09T06:22:45.387Z",
+      "sale_id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a"
+    },
+    {
+      "id": "cf1d3224-6153-413a-9461-4c817e530cfa",
+      "type": "out",
+      "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+      "quantity": 1499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #2c95d231",
+      "transaction_date": "2026-07-09T06:22:45.387Z",
+      "sale_id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a"
+    },
+    {
+      "id": "a9975854-9e65-4dd5-b455-e610f52f434a",
+      "type": "out",
+      "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+      "quantity": 1499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #2c95d231",
+      "transaction_date": "2026-07-09T06:22:45.387Z",
+      "sale_id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a"
+    },
+    {
+      "id": "1a5fe78f-533f-4ddd-993b-6d30f7a61a2d",
+      "type": "out",
+      "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+      "quantity": 1499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #2c95d231",
+      "transaction_date": "2026-07-09T06:22:45.387Z",
+      "sale_id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a"
+    },
+    {
+      "id": "9023b8b4-fa29-4d38-97a0-2accfa1a7ec4",
+      "type": "out",
+      "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+      "quantity": 1499,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "Penjualan #2c95d231",
+      "transaction_date": "2026-07-09T06:22:45.387Z",
+      "sale_id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a"
+    }
+  ],
+  "customers": [
+    {
+      "id": "f2830e0e-156b-44ca-ad59-70ca45579d43",
+      "name": "Pelanggan Umum",
+      "phone": "-",
+      "address": "-",
+      "username": null,
+      "password": null,
+      "created_at": "2026-07-08T04:41:22.835Z"
+    },
+    {
+      "id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "name": "Budi Santoso",
+      "phone": "0812-5555-1111",
+      "address": "Jl. Merdeka No. 10, Jakarta",
+      "username": "budi",
+      "password": "$2b$10$rjHj7NQUU1/3If7x.sCXGORxhncnhdPrMI0FHiOc4mCuXXDPKxTJy",
+      "created_at": "2026-07-08T04:41:22.946Z",
+      "photo_url": "/uploads/avatar-8c484fb7-8ab4-4327-85d8-d55fc9bedee5.jpg"
+    },
+    {
+      "id": "e6ceda85-3568-4727-8246-48db24e7b391",
+      "name": "Siti Rahma",
+      "phone": "0813-6666-2222",
+      "address": "Jl. Kenanga No. 5, Bandung",
+      "username": null,
+      "password": null,
+      "created_at": "2026-07-08T04:41:22.946Z"
+    },
+    {
+      "id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "name": "XOXO ihiy",
+      "phone": "08353617163",
+      "address": "Mekar Jaya, Cadas. Kabupaten Tangerang",
+      "username": "Xoxo call me handsome",
+      "password": "$2b$10$5rxtLhtU97npY.01zr0JKOGzgZXB2I4.12/jVqOX41Ke.C1q0ZBXG",
+      "created_at": "2026-07-08T07:52:10.608Z",
+      "photo_url": "/uploads/avatar-47a987da-d5dc-4cf6-9521-55b31f366d46.jpg"
+    },
+    {
+      "id": "826cc7ba-b3cd-4fcd-a662-39a8fc7d5ce0",
+      "name": "Mixo Vidianto",
+      "phone": "0857-8102-1758",
+      "address": "Kampung Jawaringan , Desa Sukamanah. RT 01 / RW 013 SUKAMANAH RESIDENCE - MAS MIKO",
+      "username": "Mixo Vidianto ",
+      "password": "$2b$10$snjGgkbtyskAkyk0.ujK6usjBxizPHMLHt0jCp0SEPzzrT/x7HFBW",
+      "created_at": "2026-07-09T01:18:51.383Z",
+      "photo_url": "/uploads/avatar-2c712900-408a-4b2e-b5d4-ab853778a6ac.jpg"
+    },
+    {
+      "id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "name": "Sunarya",
+      "phone": "08353617163",
+      "address": "Mekar Jaya, Cadas. Kabupaten Tangerang",
+      "username": "Sunarya",
+      "password": "$2b$10$vBD03VSbkaVuQShnv77/Ru.l9bmKot6AQHl1BeyTPJ8OHDEfiX1tK",
+      "created_at": "2026-07-09T06:11:14.911Z",
+      "photo_url": null
+    }
+  ],
+  "sales": [
+    {
+      "id": "d20c4528-34fc-4288-acad-33e264e83ae5",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+          "product_name": "Mouse Wireless",
+          "qty": 1,
+          "price": 85000,
+          "subtotal": 85000
+        },
+        {
+          "product_id": "75e9bc4c-4e8a-4c9d-b6d0-71358528cca5",
+          "product_name": "Kopi Sachet (Box)",
+          "qty": 2,
+          "price": 45000,
+          "subtotal": 90000
+        }
+      ],
+      "total": 175000,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "qris",
+      "payment_status": "lunas",
+      "shipping_address": "Jl. Merdeka No. 10, Jakarta",
+      "courier": "Kurir Internal",
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Budi Santoso",
+          "at": "2026-07-05T04:41:22.969Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "admin",
+          "at": "2026-07-05T05:41:22.969Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dalam perjalanan ke Jl. Merdeka No. 10, Jakarta",
+          "by": "staff",
+          "at": "2026-07-06T04:41:22.969Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "staff",
+          "at": "2026-07-06T06:41:22.969Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "admin",
+          "at": "2026-07-06T07:41:22.969Z"
+        }
+      ],
+      "sale_date": "2026-07-05T04:41:22.969Z",
+      "archived": true,
+      "archived_at": "2026-07-08T06:12:16.610Z",
+      "archived_by": "admin"
+    },
+    {
+      "id": "c70af7c5-d869-41f9-af04-0d4420df7b5e",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "af141fe9-ae7f-4d54-aae4-c32df5ef8aa5",
+          "product_name": "Kaos Polos",
+          "qty": 2,
+          "price": 65000,
+          "subtotal": 130000
+        }
+      ],
+      "total": 130000,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Jl. Merdeka No. 10, Jakarta",
+      "courier": null,
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Budi Santoso",
+          "at": "2026-07-08T04:41:22.972Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "admin",
+          "at": "2026-07-08T06:12:03.835Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dalam perjalanan ke Jl. Merdeka No. 10, Jakarta",
+          "by": "admin",
+          "at": "2026-07-08T06:12:04.898Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "admin",
+          "at": "2026-07-08T06:12:05.882Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "admin",
+          "at": "2026-07-08T06:12:06.931Z"
+        }
+      ],
+      "sale_date": "2026-07-08T02:41:22.972Z",
+      "payment_note": "",
+      "payment_proof": "/uploads/bukti-0c17b750-36fb-4d0c-a046-7ae836c50d6c.png",
+      "payment_proof_uploaded_at": "2026-07-08T06:11:18.181Z",
+      "archived": true,
+      "archived_at": "2026-07-08T07:42:51.003Z",
+      "archived_by": "Mixo Vidianto"
+    },
+    {
+      "id": "1e68b039-34ad-4884-b373-e09a6e71699d",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+          "product_name": "Celana Jeans",
+          "qty": 1,
+          "price": 220000,
+          "subtotal": 220000
+        }
+      ],
+      "total": 220000,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "qris",
+      "payment_status": "lunas",
+      "payment_note": "Sudah transfer via QRIS, ref #88213",
+      "shipping_address": "Jl. Merdeka No. 10, Jakarta",
+      "courier": null,
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Budi Santoso",
+          "at": "2026-07-08T04:41:22.972Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "admin",
+          "at": "2026-07-08T06:11:51.566Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dalam perjalanan ke Jl. Merdeka No. 10, Jakarta",
+          "by": "admin",
+          "at": "2026-07-08T06:11:52.638Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "admin",
+          "at": "2026-07-08T06:11:53.749Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "admin",
+          "at": "2026-07-08T06:11:54.701Z"
+        }
+      ],
+      "sale_date": "2026-07-07T23:41:22.972Z",
+      "archived": true,
+      "archived_at": "2026-07-08T06:12:14.549Z",
+      "archived_by": "admin"
+    },
+    {
+      "id": "cec73b55-00dd-4e10-9901-d9e82fcfaff4",
+      "customer_id": "e6ceda85-3568-4727-8246-48db24e7b391",
+      "customer_name": "Siti Rahma",
+      "items": [
+        {
+          "product_id": "a0b67266-70e3-405c-a2a8-cce6ac9cac5e",
+          "product_name": "Celana Jeans",
+          "qty": 20,
+          "price": 220000,
+          "subtotal": 4400000
+        }
+      ],
+      "total": 4400000,
+      "user_id": "986f4f8e-e4da-46f8-aed5-3239ea4d1f19",
+      "note": "",
+      "channel": "pos",
+      "status": "selesai",
+      "status_history": [
+        {
+          "status": "selesai",
+          "note": "Transaksi langsung di kasir",
+          "by": "staff",
+          "at": "2026-07-08T06:17:21.292Z"
+        }
+      ],
+      "sale_date": "2026-07-08T06:17:21.291Z"
+    },
+    {
+      "id": "896b1b01-3554-444b-868d-3f2262f6dce1",
+      "customer_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "customer_name": "XOXO ihiy",
+      "items": [
+        {
+          "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+          "product_name": "IPHONE 17 PRO MAX",
+          "qty": 5,
+          "price": 35999000,
+          "subtotal": 179995000
+        },
+        {
+          "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+          "product_name": "OPPO Find X9 Ultra",
+          "qty": 1,
+          "price": 31999000,
+          "subtotal": 31999000
+        },
+        {
+          "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+          "product_name": "ASUS ROG Phone 6 Pro 5G Dual SIM Gaming Smartphone",
+          "qty": 1,
+          "price": 20000000,
+          "subtotal": 20000000
+        },
+        {
+          "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+          "product_name": "Falcon Supernova iPhone 6 Pink Diamond",
+          "qty": 1,
+          "price": 751000000,
+          "subtotal": 751000000
+        },
+        {
+          "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+          "product_name": "SAMSUNG GALAXY s26 ULTRA",
+          "qty": 1,
+          "price": 26000000,
+          "subtotal": 26000000
+        },
+        {
+          "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+          "product_name": "XIAOMI 17 ULTA",
+          "qty": 1,
+          "price": 19999000,
+          "subtotal": 19999000
+        },
+        {
+          "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+          "product_name": "POCO X8 PRO ",
+          "qty": 1,
+          "price": 5000000,
+          "subtotal": 5000000
+        },
+        {
+          "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+          "product_name": "GOOGLE PIXEL 10 Pro",
+          "qty": 1,
+          "price": 17000000,
+          "subtotal": 17000000
+        },
+        {
+          "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+          "product_name": "HP Omen MAX 16 AK0777AX",
+          "qty": 1,
+          "price": 55000000,
+          "subtotal": 55000000
+        },
+        {
+          "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+          "product_name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+          "qty": 1,
+          "price": 53000000,
+          "subtotal": 53000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 1,
+          "price": 48000000,
+          "subtotal": 48000000
+        },
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 1,
+          "price": 54000000,
+          "subtotal": 54000000
+        }
+      ],
+      "total": 1260993000,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Mekar Jaya, Cadas. Kabupaten Tangerang",
+      "courier": "KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029",
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "XOXO ihiy",
+          "at": "2026-07-08T07:53:49.634Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T07:57:14.387Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dikirim via KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029 ke Mekar Jaya, Cadas. Kabupaten Tangerang",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:01:05.423Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T09:01:38.794Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T09:01:39.781Z"
+        }
+      ],
+      "sale_date": "2026-07-08T07:53:49.605Z",
+      "payment_note": "",
+      "payment_proof": "/uploads/bukti-aeb78699-5606-464c-a8da-d13051cae4eb.png",
+      "payment_proof_uploaded_at": "2026-07-08T07:53:58.988Z"
+    },
+    {
+      "id": "80f1af13-155f-4b17-b8eb-6c712d86d7bd",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 1,
+          "price": 54000000,
+          "subtotal": 54000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 1,
+          "price": 48000000,
+          "subtotal": 48000000
+        }
+      ],
+      "total": 102000000,
+      "user_id": "9827568f-6baf-4ec3-9573-29605b59afa9",
+      "note": "",
+      "channel": "pos",
+      "status": "selesai",
+      "status_history": [
+        {
+          "status": "selesai",
+          "note": "Transaksi langsung di kasir",
+          "by": "Rini Anggraini",
+          "at": "2026-07-08T07:54:50.253Z"
+        }
+      ],
+      "sale_date": "2026-07-08T07:54:50.249Z"
+    },
+    {
+      "id": "5a7aa506-2fc7-4812-88cb-a4608ea6cfcb",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+          "product_name": "SAMSUNG GALAXY s26 ULTRA",
+          "qty": 1,
+          "price": 26000000,
+          "subtotal": 26000000
+        },
+        {
+          "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+          "product_name": "XIAOMI 17 ULTA",
+          "qty": 1,
+          "price": 19999000,
+          "subtotal": 19999000
+        },
+        {
+          "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+          "product_name": "POCO X8 PRO ",
+          "qty": 1,
+          "price": 5000000,
+          "subtotal": 5000000
+        },
+        {
+          "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+          "product_name": "GOOGLE PIXEL 10 Pro",
+          "qty": 1,
+          "price": 17000000,
+          "subtotal": 17000000
+        },
+        {
+          "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+          "product_name": "HP Omen MAX 16 AK0777AX",
+          "qty": 5,
+          "price": 55000000,
+          "subtotal": 275000000
+        },
+        {
+          "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+          "product_name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+          "qty": 5,
+          "price": 53000000,
+          "subtotal": 265000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 5,
+          "price": 48000000,
+          "subtotal": 240000000
+        },
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 5,
+          "price": 54000000,
+          "subtotal": 270000000
+        }
+      ],
+      "total": 1117999000,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Jl. Merdeka No. 10, Jakarta",
+      "courier": "KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029",
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Budi Santoso",
+          "at": "2026-07-08T08:05:08.101Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:08:37.245Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dikirim via KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029 ke Jl. Merdeka No. 10, Jakarta",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:13:59.091Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:16:49.057Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:16:54.570Z"
+        }
+      ],
+      "sale_date": "2026-07-08T08:05:08.082Z",
+      "payment_note": "",
+      "payment_proof": "/uploads/bukti-62e3beee-898e-4fcc-b3c0-04ea7eb0be20.png",
+      "payment_proof_uploaded_at": "2026-07-08T08:05:14.264Z"
+    },
+    {
+      "id": "962a5257-3e84-4fc6-8bda-4685f38ba72d",
+      "customer_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "customer_name": "XOXO ihiy",
+      "items": [
+        {
+          "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+          "product_name": "IPHONE 17 PRO MAX",
+          "qty": 15,
+          "price": 35999000,
+          "subtotal": 539985000
+        },
+        {
+          "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+          "product_name": "OPPO Find X9 Ultra",
+          "qty": 99,
+          "price": 31999000,
+          "subtotal": 3167901000
+        },
+        {
+          "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+          "product_name": "XIAOMI 17 ULTA",
+          "qty": 19998,
+          "price": 19999000,
+          "subtotal": 399940002000
+        },
+        {
+          "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+          "product_name": "POCO X8 PRO ",
+          "qty": 133,
+          "price": 5000000,
+          "subtotal": 665000000
+        },
+        {
+          "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+          "product_name": "GOOGLE PIXEL 10 Pro",
+          "qty": 110,
+          "price": 17000000,
+          "subtotal": 1870000000
+        },
+        {
+          "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+          "product_name": "HP Omen MAX 16 AK0777AX",
+          "qty": 100,
+          "price": 55000000,
+          "subtotal": 5500000000
+        },
+        {
+          "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+          "product_name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+          "qty": 100,
+          "price": 53000000,
+          "subtotal": 5300000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 100,
+          "price": 48000000,
+          "subtotal": 4800000000
+        },
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 93,
+          "price": 54000000,
+          "subtotal": 5022000000
+        }
+      ],
+      "total": 426804888000,
+      "user_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "note": "MOHON DI ANTAR DENGAN SANGAT SAFETY YAAAAAAAAAAAAAAA",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Mekar Jaya, Cadas. Kabupaten Tangerang",
+      "courier": "KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029",
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "XOXO ihiy",
+          "at": "2026-07-08T08:25:11.242Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:35:33.011Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dikirim via KURIR PERUSAHAAN SIMIP - SJ/SIMIP/202602029 ke Mekar Jaya, Cadas. Kabupaten Tangerang",
+          "by": "Rini Anggraini",
+          "at": "2026-07-08T08:52:41.529Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "Rini Anggraini",
+          "at": "2026-07-08T08:52:47.806Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-08T08:53:10.388Z"
+        }
+      ],
+      "sale_date": "2026-07-08T08:25:11.218Z",
+      "payment_note": "",
+      "payment_proof": "/uploads/bukti-64b8a316-6551-4934-aa87-b55c6aa932bc.png",
+      "payment_proof_uploaded_at": "2026-07-08T08:30:40.009Z"
+    },
+    {
+      "id": "aeefa923-6d36-4dd7-acb9-e4aa86e595ed",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "items": [
+        {
+          "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+          "product_name": "OPPO Find X9 Ultra",
+          "qty": 1,
+          "price": 31999000,
+          "subtotal": 31999000
+        },
+        {
+          "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+          "product_name": "ASUS ROG Phone 6 Pro 5G Dual SIM Gaming Smartphone",
+          "qty": 1,
+          "price": 20000000,
+          "subtotal": 20000000
+        },
+        {
+          "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+          "product_name": "Falcon Supernova iPhone 6 Pink Diamond",
+          "qty": 1,
+          "price": 751000000,
+          "subtotal": 751000000
+        },
+        {
+          "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+          "product_name": "SAMSUNG GALAXY s26 ULTRA",
+          "qty": 1,
+          "price": 26000000,
+          "subtotal": 26000000
+        },
+        {
+          "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+          "product_name": "XIAOMI 17 ULTA",
+          "qty": 1,
+          "price": 19999000,
+          "subtotal": 19999000
+        },
+        {
+          "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+          "product_name": "POCO X8 PRO ",
+          "qty": 2,
+          "price": 5000000,
+          "subtotal": 10000000
+        },
+        {
+          "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+          "product_name": "GOOGLE PIXEL 10 Pro",
+          "qty": 2,
+          "price": 17000000,
+          "subtotal": 34000000
+        },
+        {
+          "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+          "product_name": "HP Omen MAX 16 AK0777AX",
+          "qty": 1,
+          "price": 55000000,
+          "subtotal": 55000000
+        },
+        {
+          "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+          "product_name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+          "qty": 1,
+          "price": 53000000,
+          "subtotal": 53000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 1,
+          "price": 48000000,
+          "subtotal": 48000000
+        },
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 1,
+          "price": 54000000,
+          "subtotal": 54000000
+        },
+        {
+          "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+          "product_name": "PLAYSTATION 1",
+          "qty": 1,
+          "price": 500000,
+          "subtotal": 500000
+        },
+        {
+          "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+          "product_name": "PLAYSTATION 2 ",
+          "qty": 1,
+          "price": 1500000,
+          "subtotal": 1500000
+        },
+        {
+          "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+          "product_name": "PLAYSTATION 3",
+          "qty": 1,
+          "price": 2000000,
+          "subtotal": 2000000
+        },
+        {
+          "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+          "product_name": "PLAYSTATION 4",
+          "qty": 1,
+          "price": 2900000,
+          "subtotal": 2900000
+        },
+        {
+          "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+          "product_name": "PLAYSTATION 5",
+          "qty": 1,
+          "price": 15000000,
+          "subtotal": 15000000
+        }
+      ],
+      "total": 1124898000,
+      "user_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "note": "",
+      "channel": "online",
+      "status": "selesai",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Jl. Merdeka No. 10, Jakarta",
+      "courier": "JNE",
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Budi Santoso",
+          "at": "2026-07-09T01:11:39.938Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T01:25:15.482Z"
+        },
+        {
+          "status": "diantar",
+          "note": "Pesanan dikirim via JNE ke Jl. Merdeka No. 10, Jakarta",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T01:25:21.584Z"
+        },
+        {
+          "status": "menunggu_konfirmasi_selesai",
+          "note": "Pesanan sudah sampai tujuan, menunggu konfirmasi admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T01:25:22.665Z"
+        },
+        {
+          "status": "selesai",
+          "note": "Pesanan dikonfirmasi selesai oleh admin",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T01:25:23.231Z"
+        }
+      ],
+      "sale_date": "2026-07-09T01:11:39.882Z",
+      "payment_note": "",
+      "payment_proof": "/uploads/bukti-3f86027f-ca06-4950-b052-1f6f8d73ff5c.png",
+      "payment_proof_uploaded_at": "2026-07-09T01:11:45.744Z"
+    },
+    {
+      "id": "570dc9d2-dc81-44b5-a2bd-e95e3311fe7c",
+      "customer_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "customer_name": "Sunary",
+      "items": [
+        {
+          "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+          "product_name": "IPHONE 17 PRO MAX",
+          "qty": 500,
+          "price": 35999000,
+          "subtotal": 17999500000
+        },
+        {
+          "product_id": "6efe2a4e-50e9-4540-85b2-7b01b1515604",
+          "product_name": "OPPO Find X9 Ultra",
+          "qty": 499,
+          "price": 31999000,
+          "subtotal": 15967501000
+        },
+        {
+          "product_id": "cb5c96a8-d17a-4a38-802c-cef6130ec7fb",
+          "product_name": "ASUS ROG Phone 6 Pro 5G Dual SIM Gaming Smartphone",
+          "qty": 49999,
+          "price": 20000000,
+          "subtotal": 999980000000
+        },
+        {
+          "product_id": "e3aedac7-0abc-416b-bc92-59f7cfc6369e",
+          "product_name": "Falcon Supernova iPhone 6 Pink Diamond",
+          "qty": 198,
+          "price": 751000000,
+          "subtotal": 148698000000
+        },
+        {
+          "product_id": "bff99e99-6b84-4206-a678-789f48bc8958",
+          "product_name": "SAMSUNG GALAXY s26 ULTRA",
+          "qty": 497,
+          "price": 26000000,
+          "subtotal": 12922000000
+        },
+        {
+          "product_id": "a7880023-a844-4de3-9c0c-43364a06548c",
+          "product_name": "XIAOMI 17 ULTA",
+          "qty": 19999999999999,
+          "price": 19999000,
+          "subtotal": 399979999999980000000
+        },
+        {
+          "product_id": "3f4d7f79-4330-4f36-94b0-4418f6a6a73e",
+          "product_name": "POCO X8 PRO ",
+          "qty": 863,
+          "price": 5000000,
+          "subtotal": 4315000000
+        },
+        {
+          "product_id": "45da8967-544d-4912-81c7-aabcb225a07a",
+          "product_name": "GOOGLE PIXEL 10 Pro",
+          "qty": 9886,
+          "price": 17000000,
+          "subtotal": 168062000000
+        },
+        {
+          "product_id": "604da43d-cdd1-4008-9d61-65a12b11f082",
+          "product_name": "HP Omen MAX 16 AK0777AX",
+          "qty": 1893,
+          "price": 55000000,
+          "subtotal": 104115000000
+        },
+        {
+          "product_id": "c23c8e69-d8e8-4961-8cc4-fd1c1df81bf2",
+          "product_name": "ASUS ROG Zephyrus G14 OLED GA403WR",
+          "qty": 893,
+          "price": 53000000,
+          "subtotal": 47329000000
+        },
+        {
+          "product_id": "88444628-059f-48bc-80f3-5c0e645046f5",
+          "product_name": "MSI Stealth A16 MERCEDES AMG AI+",
+          "qty": 1892,
+          "price": 48000000,
+          "subtotal": 90816000000
+        },
+        {
+          "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+          "product_name": "PLAYSTATION 1",
+          "qty": 1000,
+          "price": 500000,
+          "subtotal": 500000000
+        },
+        {
+          "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+          "product_name": "PLAYSTATION 2 ",
+          "qty": 1000,
+          "price": 1500000,
+          "subtotal": 1500000000
+        },
+        {
+          "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+          "product_name": "PLAYSTATION 3",
+          "qty": 1000,
+          "price": 2000000,
+          "subtotal": 2000000000
+        },
+        {
+          "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+          "product_name": "PLAYSTATION 4",
+          "qty": 1000,
+          "price": 2900000,
+          "subtotal": 2900000000
+        },
+        {
+          "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+          "product_name": "PLAYSTATION 5",
+          "qty": 1000,
+          "price": 15000000,
+          "subtotal": 15000000000
+        }
+      ],
+      "total": 399980001632084030000,
+      "user_id": "ae168a3a-d227-4ab1-8b3f-e6d8bef5b919",
+      "note": "",
+      "channel": "online",
+      "status": "diproses",
+      "payment_method": "transfer_bank",
+      "payment_status": "lunas",
+      "shipping_address": "Mekar Jaya, Cadas. Kabupaten Tangerang",
+      "courier": null,
+      "status_history": [
+        {
+          "status": "pending",
+          "note": "Pesanan dibuat oleh pelanggan",
+          "by": "Sunary",
+          "at": "2026-07-09T06:16:39.867Z"
+        },
+        {
+          "status": "diproses",
+          "note": "Pesanan dikonfirmasi admin, mulai diproses",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T06:19:11.741Z"
+        }
+      ],
+      "sale_date": "2026-07-09T06:16:39.813Z",
+      "payment_note": "no whatshaap : 08376423987",
+      "payment_proof": "/uploads/bukti-d17a9ada-cbe4-46d0-9806-43fa6c7655c3.png",
+      "payment_proof_uploaded_at": "2026-07-09T06:17:13.329Z"
+    },
+    {
+      "id": "d8109e09-c26b-4ddc-8efc-d2ed3987768b",
+      "customer_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "customer_name": "XOXO ihiy",
+      "items": [
+        {
+          "product_id": "803bb47e-4340-4ee9-8b54-197f31f0cdeb",
+          "product_name": "ASUS ROG Strix G16 G614FR – ",
+          "qty": 499,
+          "price": 54000000,
+          "subtotal": 26946000000
+        }
+      ],
+      "total": 26946000000,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "",
+      "channel": "pos",
+      "status": "selesai",
+      "status_history": [
+        {
+          "status": "selesai",
+          "note": "Transaksi langsung di kasir",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T06:20:26.258Z"
+        }
+      ],
+      "sale_date": "2026-07-09T06:20:26.251Z"
+    },
+    {
+      "id": "2c95d231-fd59-418b-8c56-0fceeb79cb3a",
+      "customer_id": "f2830e0e-156b-44ca-ad59-70ca45579d43",
+      "customer_name": "Pelanggan Umum",
+      "items": [
+        {
+          "product_id": "b33187a3-f375-461c-abc3-1170ad37ebf9",
+          "product_name": "PLAYSTATION 1",
+          "qty": 1499,
+          "price": 500000,
+          "subtotal": 749500000
+        },
+        {
+          "product_id": "e6483399-e134-4f06-9693-e1fb16353484",
+          "product_name": "PLAYSTATION 2 ",
+          "qty": 1499,
+          "price": 1500000,
+          "subtotal": 2248500000
+        },
+        {
+          "product_id": "919eb6ff-1a80-475f-b3b8-ce62df9c40c0",
+          "product_name": "PLAYSTATION 3",
+          "qty": 1499,
+          "price": 2000000,
+          "subtotal": 2998000000
+        },
+        {
+          "product_id": "106a0fe4-90a2-404b-bee6-be7a354fc9b1",
+          "product_name": "PLAYSTATION 4",
+          "qty": 1499,
+          "price": 2900000,
+          "subtotal": 4347100000
+        },
+        {
+          "product_id": "93a6039c-546b-4ec4-9372-490d3f5b6744",
+          "product_name": "PLAYSTATION 5",
+          "qty": 1499,
+          "price": 15000000,
+          "subtotal": 22485000000
+        }
+      ],
+      "total": 32828100000,
+      "user_id": "23ba56a6-edaf-4676-8d52-12cfc02585fe",
+      "note": "INI PESANAN untunk kamu menjalan Bisnis PLAYSTATION?",
+      "channel": "pos",
+      "status": "selesai",
+      "status_history": [
+        {
+          "status": "selesai",
+          "note": "Transaksi langsung di kasir",
+          "by": "Mixo Vidianto",
+          "at": "2026-07-09T06:22:45.409Z"
+        }
+      ],
+      "sale_date": "2026-07-09T06:22:45.387Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "c9fdb1e5-8f43-4359-9161-02c9702c9837",
+      "product_id": "053b47fb-5e9a-44f7-a00d-33661182d31f",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "rating": 5,
+      "comment": "Mousenya responsif dan nyaman dipakai, pengiriman cepat.",
+      "created_at": "2026-07-06T04:41:22.970Z"
+    },
+    {
+      "id": "4f006db6-14a2-4433-9e4c-5f2451b7d7f2",
+      "product_id": "75e9bc4c-4e8a-4c9d-b6d0-71358528cca5",
+      "customer_id": "7ea3caf2-57d3-4e8e-9b10-43f7a390f0ce",
+      "customer_name": "Budi Santoso",
+      "rating": 4,
+      "comment": "Rasa kopinya enak, packaging rapi.",
+      "created_at": "2026-07-07T04:41:22.970Z"
+    },
+    {
+      "id": "46f2655b-ee1f-426e-b557-9cbe972c7533",
+      "product_id": "bf9a1f1d-cd68-4e93-9e5c-cd5d99196664",
+      "customer_id": "c0add095-cf96-4991-b852-3a66c60d3a66",
+      "customer_name": "XOXO ihiy",
+      "rating": 5,
+      "comment": "ELEGANNNNNNN\r\nlayak sekali ini IPHONE",
+      "created_at": "2026-07-08T08:19:57.223Z"
+    }
+  ]
+}

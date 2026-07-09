@@ -1,0 +1,222 @@
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h2 class="mb-1">Lacak Pesanan</h2>
+    <p class="text-muted mb-0">No. Pesanan <span class="chip">#<%= sale.id.slice(0,8).toUpperCase() %></span></p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="/my-orders/<%= sale.id %>/invoice" class="btn btn-outline-secondary btn-elegant"><i class="fa-solid fa-receipt"></i> Nota</a>
+    <a href="/my-orders" class="btn btn-outline-secondary btn-elegant"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+  </div>
+</div>
+
+<% if (sale.status === 'dibatalkan') { %>
+<div class="alert alert-danger d-flex align-items-center gap-2 mb-4 shadow-sm" style="border-radius: 14px;">
+  <i class="fa-solid fa-circle-xmark fa-lg"></i>
+  <div>
+    <strong>Pesanan Dibatalkan.</strong>
+    <% const cancelNote = sale.status_history && sale.status_history.length ? sale.status_history[sale.status_history.length - 1].note : ''; %>
+    <% if (cancelNote) { %> <%= cancelNote %><% } %>
+  </div>
+</div>
+<% } else { %>
+<!-- ===== Progress Timeline ===== -->
+<div class="card card-elegant p-4 mb-4">
+  <div class="order-tracker">
+    <% steps.forEach((step, idx) => { %>
+    <div class="tracker-step <%= idx < currentStepIndex ? 'done' : (idx === currentStepIndex ? 'active' : '') %>">
+      <div class="tracker-dot"><i class="fa-solid <%= idx <= currentStepIndex ? 'fa-check' : step.icon %>"></i></div>
+      <div class="tracker-label"><%= step.label %></div>
+    </div>
+    <% if (idx < steps.length - 1) { %><div class="tracker-line <%= idx < currentStepIndex ? 'done' : '' %>"></div><% } %>
+    <% }) %>
+  </div>
+  <div class="text-center mt-3">
+    <span class="badge bg-<%= statusMeta.badge %> text-<%= statusMeta.text %> px-3 py-2" style="border-radius: 20px; font-size:0.85rem;">
+      <i class="fa-solid <%= statusMeta.icon %>"></i> <%= statusMeta.label %>
+    </span>
+    <div class="text-muted small mt-2"><%= statusMeta.short %></div>
+  </div>
+</div>
+<% } %>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <!-- ===== Payment status ===== -->
+    <% if (paymentMethod && paymentStatusMeta && sale.status !== 'dibatalkan') { %>
+    <div class="card card-elegant p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+        <div>
+          <h6 class="fw-bold mb-1"><i class="fa-solid <%= paymentMethod.icon %> text-primary"></i> <%= paymentMethod.label %></h6>
+          <div class="text-muted small">Total yang harus dibayar: <strong class="text-primary">Rp <%= sale.total.toLocaleString('id-ID') %></strong></div>
+        </div>
+        <span class="badge bg-<%= paymentStatusMeta.badge %> text-<%= paymentStatusMeta.text %> px-3 py-2" style="border-radius:20px;">
+          <i class="fa-solid <%= paymentStatusMeta.icon %>"></i> <%= paymentStatusMeta.label %>
+        </span>
+      </div>
+
+      <% if (sale.payment_status === 'menunggu_pembayaran') { %>
+        <div class="payment-instructions small mb-3"><%= paymentMethod.instructions %></div>
+        <form method="POST" action="/my-orders/<%= sale.id %>/mark-paid" enctype="multipart/form-data">
+          <div class="mb-2">
+            <label class="form-label small fw-semibold mb-1">Unggah Bukti Pembayaran <span class="text-danger">*</span></label>
+            <input type="file" name="payment_proof" accept="image/jpeg,image/png,image/webp" class="form-control form-control-sm" required>
+            <div class="form-text small">Screenshot/foto bukti transfer, format JPG/PNG/WEBP, maks 3MB.</div>
+          </div>
+          <input type="text" name="payment_note" class="form-control form-control-sm mb-2" placeholder="Catatan transfer (opsional, mis. no. referensi)">
+          <button type="submit" class="btn btn-primary btn-elegant w-100"><i class="fa-solid fa-check"></i> Saya Sudah Bayar</button>
+        </form>
+      <% } else if (sale.payment_status === 'menunggu_konfirmasi') { %>
+        <div class="text-muted small mb-2"><i class="fa-solid fa-hourglass-half"></i> Pembayaran kamu sedang diverifikasi oleh admin. Mohon tunggu konfirmasi.</div>
+        <% if (sale.payment_proof) { %>
+        <a href="<%= sale.payment_proof %>" target="_blank" class="d-inline-block">
+          <img src="<%= sale.payment_proof %>" alt="Bukti pembayaran" class="rounded border" style="max-width:160px; max-height:160px; object-fit:cover;">
+        </a>
+        <div class="text-muted" style="font-size:0.72rem;">Bukti pembayaran yang kamu unggah</div>
+        <% } %>
+      <% } else if (sale.payment_status === 'lunas') { %>
+        <div class="text-success small mb-2"><i class="fa-solid fa-circle-check"></i> Pembayaran telah dikonfirmasi.</div>
+        <% if (sale.payment_proof) { %>
+        <a href="<%= sale.payment_proof %>" target="_blank" class="d-inline-block">
+          <img src="<%= sale.payment_proof %>" alt="Bukti pembayaran" class="rounded border" style="max-width:160px; max-height:160px; object-fit:cover;">
+        </a>
+        <% } %>
+      <% } else if (sale.payment_status === 'cod') { %>
+        <div class="text-muted small"><i class="fa-solid fa-hand-holding-dollar"></i> <%= paymentMethod.instructions %></div>
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- ===== Delivery destination — shown once the order is on its way ===== -->
+    <% if (['diantar', 'menunggu_konfirmasi_selesai', 'selesai'].includes(sale.status)) { %>
+    <div class="card card-elegant p-4 mb-4 delivery-card">
+      <div class="d-flex align-items-start gap-3">
+        <div class="delivery-pin"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="flex-grow-1">
+          <div class="fw-semibold mb-1">
+            <% if (sale.status === 'selesai') { %>Diantar ke<% } else { %>Sedang diantar ke<% } %>
+          </div>
+          <div class="text-white-50 small mb-2"><%= sale.shipping_address || 'Alamat belum diisi' %></div>
+          <% if (sale.courier) { %>
+          <div class="small"><i class="fa-solid fa-truck"></i> Kurir: <%= sale.courier %></div>
+          <% } %>
+        </div>
+        <% if (sale.status === 'diantar') { %>
+        <span class="badge bg-light text-primary"><i class="fa-solid fa-truck-fast fa-bounce"></i> Dalam Perjalanan</span>
+        <% } %>
+      </div>
+    </div>
+    <% } else if (sale.status === 'pending' || sale.status === 'diproses') { %>
+    <div class="card card-elegant p-4 mb-4">
+      <div class="d-flex align-items-start gap-3">
+        <div class="text-primary"><i class="fa-solid fa-location-dot fa-lg"></i></div>
+        <div>
+          <div class="fw-semibold mb-1">Alamat Tujuan Pengiriman</div>
+          <div class="text-muted small"><%= sale.shipping_address || 'Belum diisi' %></div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- ===== Items ===== -->
+    <div class="card card-elegant p-4">
+      <h6 class="fw-bold mb-3">Rincian Pesanan</h6>
+      <table class="table table-sm mb-0">
+        <tbody>
+          <% sale.items.forEach(item => { %>
+          <tr>
+            <td>
+              <div class="fw-semibold small"><%= item.product_name %></div>
+              <div class="text-muted small"><%= item.qty %> x Rp <%= item.price.toLocaleString('id-ID') %></div>
+            </td>
+            <td class="text-end fw-semibold small align-middle">Rp <%= item.subtotal.toLocaleString('id-ID') %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="fw-bold">Total</td>
+            <td class="text-end fw-bold text-primary fs-5">Rp <%= sale.total.toLocaleString('id-ID') %></td>
+          </tr>
+        </tfoot>
+      </table>
+      <% if (sale.note) { %>
+      <div class="mt-3 p-2 bg-light rounded small"><strong>Catatan:</strong> <%= sale.note %></div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <!-- ===== History log ===== -->
+    <div class="card card-elegant p-4">
+      <h6 class="fw-bold mb-3">Riwayat Pesanan</h6>
+      <ul class="history-log list-unstyled mb-0">
+        <% (sale.status_history || []).slice().reverse().forEach(h => { %>
+        <li class="history-item">
+          <div class="history-dot"></div>
+          <div>
+            <div class="fw-semibold small"><%= h.note || h.status %></div>
+            <div class="text-muted small"><%= new Date(h.at).toLocaleString('id-ID') %> &middot; <%= h.by %></div>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .order-tracker {
+    display: flex;
+    align-items: flex-start;
+  }
+  .tracker-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .tracker-dot {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #eef0fb;
+    color: #a3a6c9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.25s ease;
+  }
+  .tracker-step.done .tracker-dot { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
+  .tracker-step.active .tracker-dot { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; box-shadow: 0 0 0 5px rgba(79,70,229,0.15); }
+  .tracker-label { font-size: 0.72rem; color: #6b7280; font-weight: 600; line-height: 1.2; }
+  .tracker-step.active .tracker-label, .tracker-step.done .tracker-label { color: #1e1b4b; }
+  .tracker-line { flex: 1; height: 3px; background: #eef0fb; margin-top: 19px; border-radius: 4px; }
+  .tracker-line.done { background: linear-gradient(90deg, #11998e, #38ef7d); }
+
+  .delivery-card {
+    background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+    color: #fff;
+  }
+  .delivery-pin {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+
+  .history-log { position: relative; padding-left: 1rem; }
+  .history-item { position: relative; padding-left: 1.25rem; padding-bottom: 1.1rem; border-left: 2px solid #eef0fb; }
+  .history-item:last-child { border-color: transparent; padding-bottom: 0; }
+  .history-dot { position: absolute; left: -6px; top: 2px; width: 10px; height: 10px; border-radius: 50%; background: #4f46e5; }
+
+  .payment-instructions {
+    background: #fffbeb; border: 1px solid #fde68a; color: #92400e;
+    border-radius: 10px; padding: 0.6rem 0.8rem;
+  }
+
+  @media (max-width: 576px) {
+    .tracker-label { font-size: 0.62rem; }
+    .tracker-step { width: 60px; }
+  }
+</style>

@@ -1,0 +1,168 @@
+<div class="mb-4">
+  <div class="customer-profile-card tilt-3d d-flex align-items-center gap-3 flex-wrap">
+    <div class="customer-avatar">
+      <% if (customer.photo_url) { %>
+        <img src="<%= customer.photo_url %>" alt="Foto profil">
+      <% } else { %>
+        <%= customer.name.charAt(0).toUpperCase() %>
+      <% } %>
+    </div>
+    <div class="flex-grow-1">
+      <h3 class="mb-1 fw-bold"><%= customer.name %></h3>
+      <div class="opacity-75 small">
+        <i class="fa-solid fa-user me-1"></i>@<%= customer.username %>
+        <span class="mx-2">·</span>
+        <span class="badge bg-light text-dark text-uppercase">Pelanggan</span>
+      </div>
+    </div>
+    <div class="text-end">
+      <div class="opacity-75 small">Member sejak</div>
+      <div class="fw-semibold"><%= new Date(stats.memberSince).toLocaleDateString('id-ID') %></div>
+    </div>
+  </div>
+</div>
+
+<% if (success) { %><div class="alert alert-success py-2"><i class="fa-solid fa-circle-check"></i> <%= success %></div><% } %>
+<% if (error) { %><div class="alert alert-danger py-2"><i class="fa-solid fa-triangle-exclamation"></i> <%= error %></div><% } %>
+
+<div class="stat-grid mb-4">
+  <div class="stat-card stat-card-1 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-receipt"></i></div>
+    <div class="stat-card-value"><%= stats.totalOrders %></div>
+    <div class="stat-card-label">Total Pesanan</div>
+  </div>
+  <div class="stat-card stat-card-2 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="stat-card-value"><%= stats.completedOrders %></div>
+    <div class="stat-card-label">Pesanan Selesai</div>
+  </div>
+  <div class="stat-card stat-card-5 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+    <div class="stat-card-value">Rp <%= stats.totalSpent.toLocaleString('id-ID') %></div>
+    <div class="stat-card-label">Total Belanja</div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-image text-primary"></i> Foto Profil</h6>
+      <form method="POST" action="/profile" enctype="multipart/form-data">
+        <input type="hidden" name="name" value="<%= customer.name %>">
+        <input type="hidden" name="phone" value="<%= customer.phone !== '-' ? customer.phone : '' %>">
+        <input type="hidden" name="address" value="<%= customer.address !== '-' ? customer.address : '' %>">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="avatar-preview">
+            <% if (customer.photo_url) { %>
+              <img src="<%= customer.photo_url %>" alt="Foto profil" id="avatarPreviewImg">
+            <% } else { %>
+              <div class="avatar-preview-placeholder" id="avatarPreviewImg"><i class="fa-solid fa-user"></i></div>
+            <% } %>
+          </div>
+          <div class="flex-grow-1">
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp,.gif" class="form-control form-control-sm" onchange="previewAvatar(this)">
+            <small class="text-muted d-block mt-1">JPG, PNG, WEBP, atau GIF. Maks 2MB.</small>
+          </div>
+        </div>
+        <% if (customer.photo_url) { %>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="remove_photo" value="1" id="removePhoto">
+          <label class="form-check-label small" for="removePhoto">Hapus foto profil saat ini</label>
+        </div>
+        <% } %>
+        <button type="submit" class="btn btn-primary btn-elegant"><i class="fa-solid fa-check"></i> Simpan Foto</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-id-card text-primary"></i> Informasi Profil</h6>
+      <form method="POST" action="/profile">
+        <div class="mb-3">
+          <label class="form-label small">Nama Lengkap</label>
+          <input type="text" name="name" class="form-control" value="<%= customer.name %>" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Username</label>
+          <input type="text" class="form-control" value="<%= customer.username %>" disabled>
+          <small class="text-muted">Username tidak bisa diubah.</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">No. HP</label>
+          <input type="text" name="phone" class="form-control" value="<%= customer.phone !== '-' ? customer.phone : '' %>" placeholder="08xx-xxxx-xxxx">
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Alamat</label>
+          <textarea name="address" class="form-control" rows="2" placeholder="Alamat lengkap untuk pengiriman"><%= customer.address !== '-' ? customer.address : '' %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-elegant"><i class="fa-solid fa-check"></i> Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-lock text-primary"></i> Ganti Password</h6>
+      <form method="POST" action="/profile/password">
+        <div class="mb-3">
+          <label class="form-label small">Password Saat Ini</label>
+          <input type="password" name="current_password" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Password Baru</label>
+          <input type="password" name="new_password" class="form-control" minlength="6" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Konfirmasi Password Baru</label>
+          <input type="password" name="confirm_password" class="form-control" minlength="6" required>
+        </div>
+        <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-key"></i> Ubah Password</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-elegant p-4 tilt-3d">
+      <h6 class="fw-bold mb-3"><i class="fa-solid fa-bolt text-primary"></i> Akses Cepat</h6>
+      <div class="d-flex flex-column gap-2">
+        <a href="/shop" class="quick-action-btn"><i class="fa-solid fa-cart-shopping"></i> Lanjut Belanja</a>
+        <a href="/my-orders" class="quick-action-btn"><i class="fa-solid fa-receipt"></i> Lihat Pesanan Saya</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function previewAvatar(input) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const el = document.getElementById('avatarPreviewImg');
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = 'Foto profil';
+      el.replaceWith(img);
+      img.id = 'avatarPreviewImg';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+
+<style>
+  .customer-profile-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  .customer-avatar img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  }
+  .avatar-preview {
+    width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
+    flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .avatar-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar-preview-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    background: #f1f2fb; color: #9ca3af; font-size: 1.6rem;
+  }
+</style>

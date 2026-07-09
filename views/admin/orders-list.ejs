@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h2 class="mb-1">Pesanan Masuk</h2>
+    <p class="text-muted mb-0">Kelola pesanan online dari pelanggan &mdash; konfirmasi, kirim, hingga selesai.</p>
+  </div>
+</div>
+
+<div class="filter-pills mb-4">
+  <% const tabs = [
+    { key: 'all', label: 'Semua' },
+    { key: 'pending', label: 'Menunggu Konfirmasi' },
+    { key: 'diproses', label: 'Diproses' },
+    { key: 'diantar', label: 'Sedang Diantar' },
+    { key: 'menunggu_konfirmasi_selesai', label: 'Menunggu Konfirmasi Admin' },
+    { key: 'selesai', label: 'Selesai' },
+    { key: 'dibatalkan', label: 'Dibatalkan' },
+    { key: 'arsip', label: 'Diarsipkan' }
+  ]; %>
+  <% tabs.forEach(t => { %>
+  <a href="/orders?status=<%= t.key %>" class="filter-pill <%= filter === t.key ? 'active' : '' %>">
+    <%= t.label %> <span class="pill-count"><%= counts[t.key] %></span>
+  </a>
+  <% }) %>
+</div>
+
+<div class="card card-elegant p-3">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>No. Pesanan</th><th>Tanggal</th><th>Pelanggan</th><th>Item</th><th>Total</th><th>Pembayaran</th><th>Status</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sales.forEach(s => { %>
+        <tr>
+          <td><span class="chip">#<%= s.id.slice(0,8).toUpperCase() %></span></td>
+          <td><%= new Date(s.sale_date).toLocaleString('id-ID') %></td>
+          <td><%= s.customer_name %></td>
+          <td><%= s.items.length %> produk</td>
+          <td class="fw-semibold text-primary">Rp <%= s.total.toLocaleString('id-ID') %></td>
+          <td>
+            <% if (s.paymentStatusMeta) { %>
+            <span class="badge bg-<%= s.paymentStatusMeta.badge %> text-<%= s.paymentStatusMeta.text %>"><i class="fa-solid <%= s.paymentStatusMeta.icon %>"></i> <%= s.paymentStatusMeta.label %></span>
+            <% } else { %>-<% } %>
+          </td>
+          <td><span class="badge bg-<%= s.statusMeta.badge %> text-<%= s.statusMeta.text %>"><i class="fa-solid <%= s.statusMeta.icon %>"></i> <%= s.statusMeta.label %></span></td>
+          <td class="d-flex gap-1">
+            <a href="/orders/<%= s.id %>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i> Kelola</a>
+            <% if (s.archived) { %>
+            <form method="POST" action="/orders/<%= s.id %>/restore" onsubmit="return confirm('Pulihkan pesanan ini ke daftar Pesanan Masuk?');">
+              <button type="submit" class="btn btn-sm btn-outline-success" title="Pulihkan"><i class="fa-solid fa-rotate-left"></i></button>
+            </form>
+            <% } else if (['selesai', 'dibatalkan'].includes(s.status)) { %>
+            <form method="POST" action="/orders/<%= s.id %>/archive" onsubmit="return confirm('Hapus pesanan ini dari daftar Pesanan Masuk? Data tetap tersimpan dan tetap muncul di Penjualan/Laporan.');">
+              <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus dari daftar"><i class="fa-solid fa-trash"></i></button>
+            </form>
+            <% } %>
+          </td>
+        </tr>
+        <% }) %>
+        <% if (sales.length === 0) { %>
+        <tr><td colspan="8" class="text-center text-muted py-4">
+          <% if (filter === 'arsip') { %>Belum ada pesanan yang diarsipkan.<% } else { %>Tidak ada pesanan pada kategori ini.<% } %>
+        </td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .filter-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .filter-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: #fff; color: #4b5563;
+    padding: 0.5rem 1rem; border-radius: 30px;
+    font-size: 0.82rem; font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(30,27,75,0.06);
+    transition: all 0.15s ease;
+  }
+  .filter-pill:hover { color: #4f46e5; }
+  .filter-pill.active { background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: #fff; }
+  .pill-count {
+    background: rgba(0,0,0,0.08);
+    border-radius: 20px; padding: 0.05rem 0.5rem; font-size: 0.72rem;
+  }
+  .filter-pill.active .pill-count { background: rgba(255,255,255,0.25); }
+</style>

@@ -1,0 +1,37 @@
+<div class="auth-wrapper">
+  <div class="text-center">
+    <div class="auth-welcome-banner mb-4">
+      <div class="auth-welcome-icon">🛍️</div>
+      <div class="auth-welcome-text">
+        <div class="auth-welcome-title">Selamat Datang di Website E-Commerce Kami!</div>
+        <div class="auth-welcome-sub">
+          Jika Anda belum mempunyai akun, silakan <a href="/register" class="auth-welcome-link">registrasi</a> terlebih dahulu.
+        </div>
+      </div>
+    </div>
+    <div class="auth-card auth-card-enter">
+    <h3 class="text-center mb-1"><i class="fa-solid fa-boxes-stacked"></i> SIMIP</h3>
+    <p class="text-center text-muted mb-4">Sistem Informasi Manajemen Inventori & Penjualan</p>
+    <% if (error) { %>
+      <div class="alert alert-danger py-2"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/login">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" required autofocus>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <p class="text-center mt-3 mb-0">Belum punya akun? <a href="/register">Daftar</a></p>
+    <div class="alert alert-secondary mt-3 py-2 small mb-0">
+      Demo akun — Admin: <code>admin / admin123</code><br>
+      Staff: <code>staff / staff123</code><br>
+      Pelanggan: <code>budi / budi123</code>
+    </div>
+    </div>
+  </div>
+</div>

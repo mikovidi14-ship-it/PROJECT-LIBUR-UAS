@@ -1,0 +1,282 @@
+<div class="dash-welcome-banner mb-3">
+  <div class="dash-welcome-icon">👋</div>
+  <div>
+    <div class="dash-welcome-greeting" data-greeting-prefix data-user-name="<%= user.name || user.username %>">Selamat Datang</div>
+    <div class="dash-welcome-sub">Selamat berbelanja di SIMIP Shop!</div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h2 class="mb-1">Belanja</h2>
+    <p class="text-muted mb-0">Pilih produk yang kamu suka, lalu checkout langsung.</p>
+  </div>
+  <button type="button" class="btn btn-primary btn-elegant position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+    <i class="fa-solid fa-cart-shopping"></i> Keranjang
+    <span id="cartCountBadge" class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle" style="display:none;">0</span>
+  </button>
+</div>
+
+<div class="product-grid">
+  <% products.forEach(p => { %>
+  <div class="product-card">
+    <a href="/shop/products/<%= p.id %>" class="text-decoration-none text-reset">
+      <div class="product-card-media" <% if (p.visual.type === 'icon') { %>style="background: <%= p.visual.gradient %>;"<% } %>>
+        <% if (p.visual.type === 'image') { %>
+          <img src="<%= p.visual.src %>" alt="<%= p.name %>" onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\'fa-solid fa-box product-card-icon\'></i>';this.parentElement.style.background='linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';">
+        <% } else { %>
+          <i class="fa-solid <%= p.visual.icon %> product-card-icon"></i>
+        <% } %>
+        <% if (p.stock <= p.min_stock && p.stock > 0) { %>
+          <span class="product-card-badge badge-low"><i class="fa-solid fa-triangle-exclamation"></i> Stok Menipis</span>
+        <% } else if (p.stock === 0) { %>
+          <span class="product-card-badge badge-low">Habis</span>
+        <% } %>
+      </div>
+      <div class="product-card-body pb-0">
+        <div class="product-card-category"><%= p.category ? p.category.name : '-' %></div>
+        <h5 class="product-card-title"><%= p.name %></h5>
+        <div class="product-card-price">Rp <%= p.price.toLocaleString('id-ID') %></div>
+        <div class="rating-line mb-2">
+          <% for (let i = 1; i <= 5; i++) { %>
+            <i class="fa-solid fa-star <%= i <= Math.round(p.avgRating) ? 'star-filled' : 'star-empty' %>"></i>
+          <% } %>
+          <span class="text-muted small ms-1">
+            <% if (p.reviewCount > 0) { %>
+              <%= p.avgRating.toFixed(1) %> (<%= p.reviewCount %> ulasan)
+            <% } else { %>
+              Belum ada ulasan
+            <% } %>
+          </span>
+        </div>
+      </div>
+    </a>
+    <div class="product-card-body pt-0">
+      <div class="d-flex gap-2 align-items-center">
+        <input type="number" min="1" max="<%= p.stock %>" value="1" class="form-control form-control-sm qty-input" style="width:64px;" <%= p.stock === 0 ? 'disabled' : '' %>>
+        <button type="button"
+          class="btn btn-sm btn-primary flex-fill add-to-cart-btn"
+          data-id="<%= p.id %>"
+          data-name="<%= p.name %>"
+          data-price="<%= p.price %>"
+          data-stock="<%= p.stock %>"
+          <%= p.stock === 0 ? 'disabled' : '' %>>
+          <i class="fa-solid fa-cart-plus"></i> Tambah
+        </button>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+
+  <% if (products.length === 0) { %>
+  <div class="text-center text-muted py-5 w-100">
+    <i class="fa-solid fa-box-open fa-3x mb-3"></i>
+    <p>Belum ada produk tersedia.</p>
+  </div>
+  <% } %>
+</div>
+
+<!-- Cart Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="fa-solid fa-cart-shopping"></i> Keranjang Belanja</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="cartItemsBox" class="flex-grow-1">
+      <div id="emptyCartMsg" class="text-center text-muted py-5">
+        <i class="fa-solid fa-cart-shopping fa-2x mb-2"></i>
+        <p class="mb-0">Keranjang masih kosong</p>
+      </div>
+    </div>
+    <div class="border-top pt-3 mt-3">
+      <div class="mb-2">
+        <label class="form-label small"><i class="fa-solid fa-location-dot text-primary"></i> Alamat Tujuan Pengiriman</label>
+        <textarea id="shippingAddressInput" class="form-control form-control-sm" rows="2" placeholder="Tulis alamat lengkap tujuan pengiriman..."><%= savedAddress %></textarea>
+      </div>
+      <div class="mb-2">
+        <label class="form-label small"><i class="fa-solid fa-credit-card text-primary"></i> Metode Pembayaran</label>
+        <div class="payment-method-grid">
+          <% paymentMethods.forEach((pm, idx) => { %>
+          <label class="payment-method-option">
+            <input type="radio" name="paymentMethodRadio" value="<%= pm.key %>" <%= idx === 0 ? 'checked' : '' %>>
+            <span class="pm-card">
+              <i class="fa-solid <%= pm.icon %>"></i>
+              <span class="pm-label"><%= pm.label %></span>
+            </span>
+          </label>
+          <% }) %>
+        </div>
+        <div id="paymentInstructions" class="payment-instructions small mt-2"></div>
+      </div>
+      <div class="mb-2">
+        <label class="form-label small">Catatan (opsional)</label>
+        <textarea id="noteInput" class="form-control form-control-sm" rows="2" placeholder="Catatan untuk pesanan..."></textarea>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Total</span>
+        <span class="fs-4 fw-bold text-primary" id="cartTotal">Rp 0</span>
+      </div>
+      <form id="checkoutForm" method="POST" action="/shop/checkout">
+        <input type="hidden" name="items" id="itemsField">
+        <input type="hidden" name="note" id="noteField">
+        <input type="hidden" name="shipping_address" id="shippingAddressField">
+        <input type="hidden" name="payment_method" id="paymentMethodField">
+        <button type="submit" id="checkoutBtn" class="btn btn-primary btn-elegant w-100" disabled>
+          <i class="fa-solid fa-check"></i> Checkout Sekarang
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .star-filled { color: #f7b733; }
+  .star-empty { color: #e5e7eb; }
+  .rating-line { font-size: 0.85rem; }
+
+  .payment-method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .payment-method-option { cursor: pointer; margin: 0; }
+  .payment-method-option input { position: absolute; opacity: 0; pointer-events: none; }
+  .pm-card {
+    display: flex; align-items: center; gap: 0.5rem;
+    border: 1.5px solid #e5e7eb; border-radius: 10px;
+    padding: 0.5rem 0.6rem; font-size: 0.78rem; font-weight: 600; color: #4b5563;
+    transition: all 0.15s ease;
+  }
+  .pm-card i { color: #4f46e5; }
+  .payment-method-option input:checked + .pm-card {
+    border-color: #4f46e5; background: #eef0fb; color: #1e1b4b;
+  }
+  .payment-instructions {
+    background: #fffbeb; border: 1px solid #fde68a; color: #92400e;
+    border-radius: 10px; padding: 0.6rem 0.8rem;
+  }
+</style>
+
+<script>
+  const CART_KEY_UNUSED = null; // in-memory only, no browser storage
+  let cart = [];
+
+  const cartItemsBox = document.getElementById('cartItemsBox');
+  const emptyCartMsg = document.getElementById('emptyCartMsg');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const cartCountBadge = document.getElementById('cartCountBadge');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  function formatRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+  function renderCart() {
+    cartItemsBox.innerHTML = '';
+    if (cart.length === 0) {
+      cartItemsBox.appendChild(emptyCartMsg);
+      cartCountBadge.style.display = 'none';
+    } else {
+      cart.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'd-flex justify-content-between align-items-center py-2 border-bottom';
+        row.innerHTML = `
+          <div class="flex-grow-1 me-2">
+            <div class="fw-semibold small">${item.name}</div>
+            <div class="text-muted small">${formatRp(item.price)} x
+              <input type="number" min="1" max="${item.maxStock}" value="${item.qty}" class="form-control form-control-sm d-inline-block cart-qty" style="width:56px;" data-idx="${idx}">
+            </div>
+          </div>
+          <div class="text-end">
+            <div class="fw-semibold small mb-1">${formatRp(item.price * item.qty)}</div>
+            <button type="button" class="btn btn-sm btn-outline-danger cart-remove" data-idx="${idx}"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `;
+        cartItemsBox.appendChild(row);
+      });
+      const totalCount = cart.reduce((s, i) => s + i.qty, 0);
+      cartCountBadge.textContent = totalCount;
+      cartCountBadge.style.display = 'inline-block';
+    }
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    cartTotalEl.textContent = formatRp(total);
+    checkoutBtn.disabled = cart.length === 0;
+  }
+
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.product-card');
+      const qtyInput = card.querySelector('.qty-input');
+      const qty = Math.max(1, parseInt(qtyInput.value) || 1);
+      const id = btn.dataset.id, name = btn.dataset.name, price = Number(btn.dataset.price), stock = Number(btn.dataset.stock);
+
+      const existing = cart.find(i => i.product_id === id);
+      const currentQty = existing ? existing.qty : 0;
+      if (currentQty + qty > stock) {
+        alert(`Stok "${name}" tidak cukup. Tersedia: ${stock}.`);
+        return;
+      }
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ product_id: id, name, price, qty, maxStock: stock });
+      }
+      renderCart();
+      const offEl = document.getElementById('cartOffcanvas');
+      bootstrap.Offcanvas.getOrCreateInstance(offEl).show();
+    });
+  });
+
+  cartItemsBox.addEventListener('click', (e) => {
+    const btn = e.target.closest('.cart-remove');
+    if (btn) {
+      cart.splice(Number(btn.dataset.idx), 1);
+      renderCart();
+    }
+  });
+
+  cartItemsBox.addEventListener('change', (e) => {
+    if (e.target.classList.contains('cart-qty')) {
+      const idx = Number(e.target.dataset.idx);
+      let val = parseInt(e.target.value) || 1;
+      if (val > cart[idx].maxStock) val = cart[idx].maxStock;
+      cart[idx].qty = Math.max(1, val);
+      renderCart();
+    }
+  });
+
+  document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+    if (cart.length === 0) { e.preventDefault(); return; }
+    const address = document.getElementById('shippingAddressInput').value.trim();
+    if (!address) {
+      e.preventDefault();
+      alert('Isi alamat tujuan pengiriman terlebih dahulu.');
+      document.getElementById('shippingAddressInput').focus();
+      return;
+    }
+    const selectedPayment = document.querySelector('input[name="paymentMethodRadio"]:checked');
+    if (!selectedPayment) {
+      e.preventDefault();
+      alert('Pilih metode pembayaran terlebih dahulu.');
+      return;
+    }
+    document.getElementById('itemsField').value = JSON.stringify(cart.map(i => ({ product_id: i.product_id, qty: i.qty })));
+    document.getElementById('noteField').value = document.getElementById('noteInput').value;
+    document.getElementById('shippingAddressField').value = address;
+    document.getElementById('paymentMethodField').value = selectedPayment.value;
+  });
+
+  // Show a short instruction blurb for the currently-selected payment method
+  const paymentInstructionsMap = <%- JSON.stringify(Object.fromEntries(paymentMethods.map(pm => [pm.key, pm.instructions]))) %>;
+  const paymentInstructionsBox = document.getElementById('paymentInstructions');
+
+  function updatePaymentInstructions() {
+    const selected = document.querySelector('input[name="paymentMethodRadio"]:checked');
+    paymentInstructionsBox.textContent = selected ? paymentInstructionsMap[selected.value] : '';
+  }
+  document.querySelectorAll('input[name="paymentMethodRadio"]').forEach(radio => {
+    radio.addEventListener('change', updatePaymentInstructions);
+  });
+  updatePaymentInstructions();
+
+  renderCart();
+</script>

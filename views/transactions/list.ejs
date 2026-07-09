@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Transaksi Stok</h2>
+  <a href="/transactions/new" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Catat Transaksi</a>
+</div>
+
+<div class="card card-stat p-3">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Tanggal</th><th>Produk</th><th>Tipe</th><th>Jumlah</th><th>Oleh</th><th>Catatan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% transactions.forEach(t => { %>
+        <tr>
+          <td><%= new Date(t.transaction_date).toLocaleString('id-ID') %></td>
+          <td><%= t.product ? t.product.name : '-' %></td>
+          <td>
+            <span class="badge <%= t.type === 'in' ? 'bg-success' : 'bg-danger' %>">
+              <%= t.type === 'in' ? 'Masuk' : 'Keluar' %>
+            </span>
+          </td>
+          <td><%= t.quantity %></td>
+          <td><%= t.user ? t.user.username : '-' %></td>
+          <td><%= t.note || '-' %></td>
+        </tr>
+        <% }) %>
+        <% if (transactions.length === 0) { %>
+        <tr><td colspan="6" class="text-center text-muted py-4">Belum ada transaksi.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

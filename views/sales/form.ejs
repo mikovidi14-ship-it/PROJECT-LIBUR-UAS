@@ -1,0 +1,248 @@
+<h2 class="mb-4">Penjualan Baru</h2>
+
+<% if (error) { %><div class="alert alert-danger py-2"><%= error %></div><% } %>
+
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="card card-elegant p-4 mb-3">
+      <h6 class="mb-3">1. Pilih Produk</h6>
+      <div class="row g-2 align-items-end">
+        <div class="col-7">
+          <label class="form-label small">Produk</label>
+          <select id="productSelect" class="form-select">
+            <% products.forEach(p => { %>
+            <option value="<%= p.id %>" data-price="<%= p.price %>" data-stock="<%= p.stock %>" data-name="<%= p.name %>">
+              <%= p.name %> — Rp <%= p.price.toLocaleString('id-ID') %> (stok: <%= p.stock %>)
+            </option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-3">
+          <label class="form-label small">Jumlah</label>
+          <input type="number" id="qtyInput" class="form-control" value="1" min="1">
+        </div>
+        <div class="col-2">
+          <button type="button" id="addToCartBtn" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+      <div id="stockWarning" class="text-danger small mt-2" style="display:none;"></div>
+    </div>
+
+    <div class="card card-elegant p-4">
+      <h6 class="mb-3">Keranjang</h6>
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr><th>Produk</th><th>Harga</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+          </thead>
+          <tbody id="cartBody">
+            <tr id="emptyCartRow"><td colspan="5" class="text-center text-muted py-4">Keranjang masih kosong</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end border-top pt-3 mt-2">
+        <div class="text-end">
+          <div class="text-muted small">Total Belanja</div>
+          <div class="fs-3 fw-bold text-primary" id="cartTotal">Rp 0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card card-elegant p-4">
+      <h6 class="mb-3">2. Data Pelanggan</h6>
+
+      <div class="mb-3">
+        <label class="form-label small">Pilih Pelanggan</label>
+        <select id="customerSelect" class="form-select">
+          <% customers.forEach(c => { %>
+          <option value="<%= c.id %>"><%= c.name %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <button type="button" class="btn btn-sm btn-outline-primary w-100" id="toggleNewCustomer">
+          <i class="fa-solid fa-user-plus"></i> Pelanggan baru?
+        </button>
+      </div>
+
+      <div id="newCustomerBox" style="display:none;" class="mb-3 p-3 rounded new-customer-box">
+        <input type="text" id="newCustName" class="form-control form-control-sm mb-2" placeholder="Nama pelanggan baru">
+        <input type="text" id="newCustPhone" class="form-control form-control-sm mb-2" placeholder="No. HP (opsional)">
+        <input type="text" id="newCustAddress" class="form-control form-control-sm mb-2" placeholder="Alamat (opsional)">
+        <button type="button" id="saveNewCustomerBtn" class="btn btn-sm btn-success w-100">Simpan Pelanggan</button>
+        <div id="newCustomerMsg" class="small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small">Catatan (opsional)</label>
+        <textarea id="noteInput" class="form-control" rows="2" placeholder="Catatan tambahan..."></textarea>
+      </div>
+
+      <form id="saleForm" method="POST" action="/sales/new">
+        <input type="hidden" name="customer_id" id="customerIdField">
+        <input type="hidden" name="note" id="noteField">
+        <input type="hidden" name="items" id="itemsField">
+        <button type="submit" id="submitSaleBtn" class="btn btn-primary btn-elegant w-100" disabled>
+          <i class="fa-solid fa-check"></i> Proses Penjualan
+        </button>
+      </form>
+      <a href="/sales" class="btn btn-outline-secondary w-100 mt-2">Batal</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .new-customer-box { background: #f5f6fe; }
+</style>
+
+<script>
+  const cart = [];
+
+  const productSelect = document.getElementById('productSelect');
+  const qtyInput = document.getElementById('qtyInput');
+  const cartBody = document.getElementById('cartBody');
+  const emptyCartRow = document.getElementById('emptyCartRow');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const stockWarning = document.getElementById('stockWarning');
+  const submitBtn = document.getElementById('submitSaleBtn');
+
+  function formatRp(n) {
+    return 'Rp ' + n.toLocaleString('id-ID');
+  }
+
+  function renderCart() {
+    cartBody.innerHTML = '';
+    if (cart.length === 0) {
+      cartBody.appendChild(emptyCartRow);
+    } else {
+      cart.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.name}</td>
+          <td>${formatRp(item.price)}</td>
+          <td style="width:90px;">
+            <input type="number" min="1" max="${item.maxStock}" value="${item.qty}" class="form-control form-control-sm cart-qty" data-idx="${idx}">
+          </td>
+          <td class="fw-semibold">${formatRp(item.price * item.qty)}</td>
+          <td><button type="button" class="btn btn-sm btn-outline-danger cart-remove" data-idx="${idx}"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+        cartBody.appendChild(tr);
+      });
+    }
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    cartTotalEl.textContent = formatRp(total);
+    submitBtn.disabled = cart.length === 0;
+  }
+
+  document.getElementById('addToCartBtn').addEventListener('click', () => {
+    const opt = productSelect.options[productSelect.selectedIndex];
+    const productId = opt.value;
+    const price = Number(opt.dataset.price);
+    const stock = Number(opt.dataset.stock);
+    const name = opt.dataset.name;
+    const qty = Math.max(1, parseInt(qtyInput.value) || 1);
+
+    stockWarning.style.display = 'none';
+
+    const existing = cart.find(i => i.product_id === productId);
+    const currentQtyInCart = existing ? existing.qty : 0;
+
+    if (currentQtyInCart + qty > stock) {
+      stockWarning.textContent = `Stok "${name}" tidak cukup. Tersedia: ${stock}, sudah di keranjang: ${currentQtyInCart}.`;
+      stockWarning.style.display = 'block';
+      return;
+    }
+
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ product_id: productId, name, price, qty, maxStock: stock });
+    }
+    qtyInput.value = 1;
+    renderCart();
+  });
+
+  cartBody.addEventListener('click', (e) => {
+    const btn = e.target.closest('.cart-remove');
+    if (btn) {
+      cart.splice(Number(btn.dataset.idx), 1);
+      renderCart();
+    }
+  });
+
+  cartBody.addEventListener('change', (e) => {
+    if (e.target.classList.contains('cart-qty')) {
+      const idx = Number(e.target.dataset.idx);
+      let val = parseInt(e.target.value) || 1;
+      if (val > cart[idx].maxStock) {
+        val = cart[idx].maxStock;
+        stockWarning.textContent = `Maksimal stok "${cart[idx].name}" adalah ${cart[idx].maxStock}.`;
+        stockWarning.style.display = 'block';
+      }
+      cart[idx].qty = Math.max(1, val);
+      renderCart();
+    }
+  });
+
+  // New customer toggle
+  const toggleBtn = document.getElementById('toggleNewCustomer');
+  const newCustomerBox = document.getElementById('newCustomerBox');
+  toggleBtn.addEventListener('click', () => {
+    newCustomerBox.style.display = newCustomerBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  document.getElementById('saveNewCustomerBtn').addEventListener('click', async () => {
+    const name = document.getElementById('newCustName').value.trim();
+    const phone = document.getElementById('newCustPhone').value.trim();
+    const address = document.getElementById('newCustAddress').value.trim();
+    const msgEl = document.getElementById('newCustomerMsg');
+
+    if (!name) {
+      msgEl.textContent = 'Nama wajib diisi.';
+      msgEl.className = 'small mt-1 text-danger';
+      return;
+    }
+
+    try {
+      const res = await fetch('/customers/quick-add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ name, phone, address })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Gagal menyimpan');
+
+      const opt = document.createElement('option');
+      opt.value = data.id;
+      opt.textContent = data.name;
+      opt.selected = true;
+      document.getElementById('customerSelect').appendChild(opt);
+
+      msgEl.textContent = `Pelanggan "${data.name}" ditambahkan & dipilih.`;
+      msgEl.className = 'small mt-1 text-success';
+      document.getElementById('newCustName').value = '';
+      document.getElementById('newCustPhone').value = '';
+      document.getElementById('newCustAddress').value = '';
+    } catch (err) {
+      msgEl.textContent = err.message;
+      msgEl.className = 'small mt-1 text-danger';
+    }
+  });
+
+  document.getElementById('saleForm').addEventListener('submit', (e) => {
+    if (cart.length === 0) {
+      e.preventDefault();
+      return;
+    }
+    document.getElementById('customerIdField').value = document.getElementById('customerSelect').value;
+    document.getElementById('noteField').value = document.getElementById('noteInput').value;
+    document.getElementById('itemsField').value = JSON.stringify(
+      cart.map(i => ({ product_id: i.product_id, qty: i.qty }))
+    );
+  });
+
+  renderCart();
+</script>

@@ -1,0 +1,271 @@
+<div class="dash-welcome-banner mb-3">
+  <div class="dash-welcome-icon">👋</div>
+  <div>
+    <div class="dash-welcome-greeting" data-greeting-prefix data-user-name="<%= user.name || user.username %>">Selamat Datang</div>
+    <div class="dash-welcome-sub">Selamat datang kembali di Dashboard SIMIP</div>
+  </div>
+</div>
+
+<div class="dashboard-header mb-4">
+  <h2 class="mb-1"><i class="fa-solid fa-gauge-high text-primary"></i> Dashboard</h2>
+  <p class="text-muted mb-0">Ringkasan performa inventori & penjualan kamu</p>
+</div>
+
+<div class="stat-grid mb-4">
+  <a href="/sales" class="stat-card stat-card-5 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-coins"></i></div>
+    <div class="stat-card-value">Rp <%= (totalRevenue/1000000).toFixed(1) %>jt</div>
+    <div class="stat-card-label">Total Omzet Penjualan</div>
+  </a>
+  <a href="/sales" class="stat-card stat-card-6 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+    <div class="stat-card-value">Rp <%= todayRevenue.toLocaleString('id-ID') %></div>
+    <div class="stat-card-label">Omzet Hari Ini</div>
+  </a>
+  <a href="/products" class="stat-card stat-card-1 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-box"></i></div>
+    <div class="stat-card-value"><%= totalProducts %></div>
+    <div class="stat-card-label">Total Produk</div>
+  </a>
+  <a href="/products" class="stat-card stat-card-2 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+    <div class="stat-card-value">Rp <%= (totalStockValue/1000000).toFixed(1) %>jt</div>
+    <div class="stat-card-label">Nilai Stok (modal)</div>
+  </a>
+  <a href="/customers" class="stat-card stat-card-7 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-users"></i></div>
+    <div class="stat-card-value"><%= totalCustomers %></div>
+    <div class="stat-card-label">Total Pelanggan</div>
+  </a>
+  <a href="/products" class="stat-card stat-card-3 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <div class="stat-card-value"><%= lowStock.length %></div>
+    <div class="stat-card-label">Stok Menipis</div>
+  </a>
+  <a href="/transactions" class="stat-card stat-card-4 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-right-left"></i></div>
+    <div class="stat-card-value"><%= totalTransactionsToday %></div>
+    <div class="stat-card-label">Transaksi Hari Ini</div>
+  </a>
+  <a href="/orders?status=pending" class="stat-card stat-card-8 tilt-3d">
+    <div class="stat-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+    <div class="stat-card-value"><%= pendingOrders %></div>
+    <div class="stat-card-label">Pesanan Online Perlu Diproses</div>
+  </a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0">Tren Penjualan</h6>
+        <span class="chip">14 hari terakhir</span>
+      </div>
+      <canvas id="salesChart" height="90"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <h6 class="mb-3">Top 5 Produk Terlaris</h6>
+      <canvas id="topProductsChart" height="140"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0">Tren Omzet Penjualan</h6>
+        <span class="chip">14 hari terakhir</span>
+      </div>
+      <canvas id="revenueChart" height="90"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0"><i class="fa-solid fa-crown text-warning"></i> Top Pelanggan</h6>
+      </div>
+      <% if (topCustomers.length > 0) { %>
+      <ul class="list-unstyled top-customer-list mb-0">
+        <% topCustomers.forEach((c, idx) => { %>
+        <li class="d-flex align-items-center justify-content-between py-2 <%= idx < topCustomers.length - 1 ? 'border-bottom' : '' %>">
+          <div class="d-flex align-items-center gap-2">
+            <span class="rank-badge rank-<%= idx + 1 %>"><%= idx + 1 %></span>
+            <div>
+              <div class="fw-semibold small"><%= c.name %></div>
+              <div class="text-muted" style="font-size:0.72rem;"><%= c.totalTransaksi %>x transaksi</div>
+            </div>
+          </div>
+          <div class="fw-bold text-primary small">Rp <%= (c.totalBelanja/1000).toFixed(0) %>rb</div>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-users fa-2x mb-2"></i>
+        <p class="mb-0 small">Belum ada data penjualan pelanggan.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-5">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <h6 class="mb-3">Nilai Stok per Kategori</h6>
+      <canvas id="categoryChart" height="200"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card card-elegant p-4 h-100 tilt-3d">
+      <h6 class="mb-3 text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Peringatan Stok Menipis</h6>
+      <% if (lowStock.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table table-sm mb-0 align-middle">
+          <thead><tr><th>Produk</th><th>Stok Saat Ini</th><th>Stok Minimum</th></tr></thead>
+          <tbody>
+            <% lowStock.forEach(p => { %>
+            <tr>
+              <td><%= p.name %></td>
+              <td><span class="badge badge-low"><%= p.stock %></span></td>
+              <td><%= p.min_stock %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <% } else { %>
+      <div class="text-center text-muted py-4">
+        <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+        <p class="mb-0">Semua stok dalam kondisi aman.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+  Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+  // Render at the screen's native pixel density so lines/text stay crisp
+  // on HiDPI / Retina displays instead of looking soft or pixelated.
+  Chart.defaults.devicePixelRatio = Math.max(window.devicePixelRatio || 1, 2);
+  Chart.defaults.elements.line.borderCapStyle = 'round';
+  Chart.defaults.elements.line.borderJoinStyle = 'round';
+
+  const salesLabels = <%- JSON.stringify(salesTrend.map(d => d.label)) %>;
+  const salesData = <%- JSON.stringify(salesTrend.map(d => d.qty)) %>;
+  const salesCtx = document.getElementById('salesChart').getContext('2d');
+  const salesGradient = salesCtx.createLinearGradient(0, 0, 0, 250);
+  salesGradient.addColorStop(0, 'rgba(99,102,241,0.35)');
+  salesGradient.addColorStop(1, 'rgba(99,102,241,0.02)');
+
+  new Chart(salesCtx, {
+    type: 'line',
+    data: {
+      labels: salesLabels,
+      datasets: [{
+        label: 'Jumlah Terjual',
+        data: salesData,
+        borderColor: '#6366f1',
+        backgroundColor: salesGradient,
+        borderWidth: 3,
+        pointBackgroundColor: '#6366f1',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0f1fa' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const revenueLabels = <%- JSON.stringify(revenueTrend.map(d => d.label)) %>;
+  const revenueData = <%- JSON.stringify(revenueTrend.map(d => d.revenue)) %>;
+  const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+  const revenueGradient = revenueCtx.createLinearGradient(0, 0, 0, 250);
+  revenueGradient.addColorStop(0, 'rgba(17,153,142,0.35)');
+  revenueGradient.addColorStop(1, 'rgba(17,153,142,0.02)');
+
+  new Chart(revenueCtx, {
+    type: 'line',
+    data: {
+      labels: revenueLabels,
+      datasets: [{
+        label: 'Omzet',
+        data: revenueData,
+        borderColor: '#11998e',
+        backgroundColor: revenueGradient,
+        borderWidth: 3,
+        pointBackgroundColor: '#11998e',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => 'Rp ' + ctx.parsed.y.toLocaleString('id-ID') } }
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0f1fa' }, ticks: { callback: v => 'Rp ' + (v/1000).toFixed(0) + 'rb' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const topLabels = <%- JSON.stringify(topProducts.map(p => p.name)) %>;
+  const topData = <%- JSON.stringify(topProducts.map(p => p.qty)) %>;
+  new Chart(document.getElementById('topProductsChart'), {
+    type: 'doughnut',
+    data: {
+      labels: topLabels,
+      datasets: [{
+        data: topData,
+        backgroundColor: ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff'],
+        borderWidth: 3,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      cutout: '65%',
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 11 } } } }
+    }
+  });
+
+  const catLabels = <%- JSON.stringify(categoryBreakdown.map(c => c.name)) %>;
+  const catData = <%- JSON.stringify(categoryBreakdown.map(c => c.value)) %>;
+  new Chart(document.getElementById('categoryChart'), {
+    type: 'bar',
+    data: {
+      labels: catLabels,
+      datasets: [{
+        label: 'Nilai Stok (Rp)',
+        data: catData,
+        backgroundColor: ['#6366f1', '#f472b6', '#34d399', '#fbbf24', '#60a5fa'],
+        borderRadius: 8,
+        maxBarThickness: 46
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0f1fa' }, ticks: { callback: v => 'Rp ' + (v/1000000).toFixed(1) + 'jt' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>

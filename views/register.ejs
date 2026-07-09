@@ -1,0 +1,63 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h3 class="text-center mb-1"><i class="fa-solid fa-user-plus"></i> Daftar Akun</h3>
+    <p class="text-center text-muted mb-4">SIMIP</p>
+    <% if (error) { %>
+      <div class="alert alert-danger py-2"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/register">
+      <div class="mb-3">
+        <label class="form-label">Daftar sebagai</label>
+        <select name="role" id="roleSelect" class="form-select">
+          <option value="pelanggan">Pelanggan (belanja online)</option>
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div id="customerFields">
+        <div class="mb-3">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" name="name" id="nameInput" class="form-control" placeholder="Nama lengkap kamu">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">No. HP</label>
+          <input type="text" name="phone" class="form-control" placeholder="Opsional">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Alamat</label>
+          <input type="text" name="address" class="form-control" placeholder="Opsional">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" required autofocus>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Konfirmasi Password</label>
+        <input type="password" name="confirm_password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Daftar</button>
+    </form>
+    <p class="text-center mt-3 mb-0">Sudah punya akun? <a href="/login">Login</a></p>
+  </div>
+</div>
+
+<script>
+  const roleSelect = document.getElementById('roleSelect');
+  const customerFields = document.getElementById('customerFields');
+  const nameInput = document.getElementById('nameInput');
+
+  function syncFields() {
+    const isCustomer = roleSelect.value === 'pelanggan';
+    customerFields.style.display = isCustomer ? 'block' : 'none';
+    nameInput.required = isCustomer;
+  }
+  roleSelect.addEventListener('change', syncFields);
+  syncFields();
+</script>
